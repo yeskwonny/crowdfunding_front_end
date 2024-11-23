@@ -1,12 +1,15 @@
 import ProjectCard from "../components/ProjectCard";
-import { allProjects } from "../data";
+import useProjects from "../hooks/use-projects";
 import "./HomePage.css";
 
+
 function HomePage() {
+  const { projects } = useProjects();
+  console.log(projects);
   return (
     <div id="project-list">
-      {allProjects.map((projectData, index) => {
-        return <ProjectCard key={index} projectData={projectData} />;
+      {projects.map((projectData, key) => {
+        return <ProjectCard key={key} projectData={projectData} />;
       })}
     </div>
   );

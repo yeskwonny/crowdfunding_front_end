@@ -5,7 +5,7 @@ import "./HomePage.css";
 
 function HomePage() {
   const { projects } = useProjects();
-  console.log(projects);
+  // console.log(projects);
   return (
     <div id="project-list">
       {projects.map((projectData, key) => {

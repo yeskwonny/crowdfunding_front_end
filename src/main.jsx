@@ -2,11 +2,12 @@ import { StrictMode } from "react";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
+// component
+import NavBar from "./Components/NavBar.jsx";
+// pages
 import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
-import NavBar from "./Components/NavBar.jsx";
-
+import Login from "./pages/Login.jsx";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/project/:id", element: <ProjectPage /> },
     ],
+  },
+  // don't need a nav
+  {
+    path: "/login",
+    element: <Login />,
   },
 ]);
 

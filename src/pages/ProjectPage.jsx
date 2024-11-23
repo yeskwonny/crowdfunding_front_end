@@ -3,18 +3,16 @@ import useProject from "../hooks/use-project";
 
 function ProjectPage() {
   const { id } = useParams();
-  console.log(id);
+  // console.log(id);
   const { project, isLoading, error } = useProject(id);
-  console.log(project);
+  // console.log(project);
   if (isLoading) {
     return <p>Loading</p>;
   }
   if (error) {
     return <p>{error.message}</p>;
   }
-  return !project ? (
-    <div>Loading...</div>
-  ) : (
+  return (
     <div>
       <h2>{project.title}</h2>
       <h3>Created at: {project.date_created}</h3>

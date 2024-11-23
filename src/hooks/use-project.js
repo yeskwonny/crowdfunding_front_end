@@ -16,7 +16,7 @@ export default function useProject(id) {
         setError(error);
         setIsLoading(false);
       });
-  }, []);
+  }, [id]);
 
   return { project, isLoading, error };
 }

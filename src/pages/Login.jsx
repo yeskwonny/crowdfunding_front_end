@@ -1,5 +1,7 @@
+import LoginFrom from "../components/LoginForm";
+
 function Login() {
-  return <div>this is login</div>;
+  return <LoginFrom />;
 }
 
 export default Login;

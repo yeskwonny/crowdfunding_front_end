@@ -1,0 +1,15 @@
+.menu-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding: 3rem;
+  width: 95%;
+  border-top: 2px solid var(--color-red);
+  border-bottom: 2px solid var(--color-red);
+  margin: 2rem auto;
+}
+
+.menu-item {
+  text-align: center;
+  font-size: 0.9rem;
+}

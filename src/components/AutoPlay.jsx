@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import "./AutoPlay.css";
-export default function AutoPlay() {
+function AutoPlay() {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
@@ -23,3 +23,5 @@ export default function AutoPlay() {
     </div>
   );
 }
+
+export default AutoPlay;

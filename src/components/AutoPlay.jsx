@@ -6,7 +6,7 @@ function AutoPlay() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCount((prevCount) => (prevCount + 1) % 6);
-    }, 2000);
+    }, 3000);
 
     return () => clearInterval(timer);
   }, []);

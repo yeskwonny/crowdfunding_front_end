@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import "./ProjectCard.css";
 function ProjectCard({ projectData }) {
-  console.log(projectData);
   const projectLink = `project/${projectData.id}`;
   return (
     <div className="project-card">

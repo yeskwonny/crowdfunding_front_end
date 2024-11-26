@@ -8,6 +8,7 @@ import NavBar from "./Components/NavBar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import Login from "./pages/Login.jsx";
+import "./main.css";
 const router = createBrowserRouter([
   {
     path: "/",

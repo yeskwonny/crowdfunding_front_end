@@ -1,12 +1,12 @@
-.auto-play {
+.slider-container img {
+  width: 30%;
+  height: %;
+  object-fit: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 3rem;
 }
-.auto-play > img {
-  width: 60%;
-  height: auto;
-  max-height: 480px;
-  object-fit: cover;
+.slider-container {
+  width: 100%;
+  margin: 0 auto;
 }

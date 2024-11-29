@@ -1,9 +1,11 @@
 import { useState } from "react";
 import postLogin from "../api/post-login";
 import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/use-auth";
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { auth, setAuth } = useAuth();
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
@@ -14,15 +16,21 @@ function LoginForm() {
     setCredentials((prev) => ({ ...prev, [id]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    console.log(credentials);
-    if (credentials.username && credentials.password) {
-      postLogin(credentials.username, credentials.password).then((res) => {
-        window.localStorage.setItem("token", res.token);
+    if (credentials.username && credentials.password)
+      try {
+        const response = await postLogin(
+          credentials.username,
+          credentials.password
+        );
+        console.log(response);
+        window.localStorage.setItem("token", response.token);
+        setAuth({ token: response.token });
         navigate("/");
-      });
-    }
+      } catch (e) {
+        console.error("Login error", e);
+      }
   }
   return (
     <form>

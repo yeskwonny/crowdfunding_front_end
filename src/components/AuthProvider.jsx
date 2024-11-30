@@ -5,7 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = function ({ children }) {
   const [auth, setAuth] = useState({
-    totke: window.localStorage.getItem("token"),
+    token: window.localStorage.getItem("token"),
   });
   // what does this do? make chilren can access to the value?
   // and get value data using useContext?

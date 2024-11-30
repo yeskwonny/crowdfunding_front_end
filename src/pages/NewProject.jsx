@@ -1,9 +1,9 @@
-import NewProjectForm from "../components/NewProjectForm";
+import ProjectForm from "../components/ProjectForm";
 
 function NewProject() {
   return (
     <div>
-      <NewProjectForm />
+      <ProjectForm />
     </div>
   );
 }

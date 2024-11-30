@@ -11,7 +11,6 @@ function SignupForm() {
     lastname: "",
     email: "",
   });
-  const { auth, setAuth } = useAuth();
 
   const navigate = useNavigate();
 
@@ -32,7 +31,7 @@ function SignupForm() {
         );
         const login = await postLogin(userInfo.username, userInfo.password);
         window.localStorage.setItem("token", login.token);
-        setAuth({ token: login.token });
+
         navigate("/");
       } catch (e) {
         console.error("Sign up error", e);

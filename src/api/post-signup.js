@@ -23,21 +23,19 @@ async function postSignUp(username, password, email, firstname, lastname) {
       }),
     });
 
-    console.log("Response status:", response.status); 
-
     if (!response.ok) {
       const fallbackError = "Error trying to Signup";
 
       try {
-        const data = await response.json(); 
+        const data = await response.json();
         const errorMsg = data?.detail ?? fallbackError;
         throw new Error(errorMsg);
       } catch (parseError) {
-        throw new Error(fallbackError); 
+        throw new Error(fallbackError);
       }
     }
 
-    return await response.json(); 
+    return await response.json();
   } catch (error) {
     console.error("Error during signup:", error.message);
     throw new Error(error.message || "An unexpected error occurred.");

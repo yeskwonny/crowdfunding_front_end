@@ -10,6 +10,7 @@ import ProjectPage from "./pages/ProjectPage.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import NewProject from "./pages/NewProject.jsx";
+import NewPledge from "./pages/NewPledge.jsx";
 
 import { AuthProvider } from "./components/AuthProvider.jsx";
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
+      { path: "/pledges", element: <NewPledge /> },
     ],
   },
   // don't need a nav

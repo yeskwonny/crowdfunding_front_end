@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import useProject from "../hooks/use-project";
+import { Link } from "react-router-dom";
 
 function ProjectPage() {
   const { id } = useParams();
@@ -26,6 +27,9 @@ function ProjectPage() {
           </li>
         ))}
       </ul>
+      <Link to="/pledges/">
+        <button>pledge</button>
+      </Link>
     </div>
   );
 }

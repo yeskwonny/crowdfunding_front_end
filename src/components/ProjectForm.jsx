@@ -23,7 +23,7 @@ function ProjectForm() {
     try {
       const { title, director, genres, synopsis, is_open, target, targetDate } =
         project;
-      
+
       const response = await postCreateProject(
         title,
         director,
@@ -41,7 +41,6 @@ function ProjectForm() {
     }
   }
 
-  console.log(project);
   return (
     <div>
       <form>

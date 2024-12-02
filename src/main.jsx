@@ -25,7 +25,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
-      { path: "/pledges", element: <NewPledge /> },
+      { path: "/pledges/:id", element: <NewPledge /> },
     ],
   },
   // don't need a nav

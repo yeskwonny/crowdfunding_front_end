@@ -6,6 +6,7 @@ function ProjectPage() {
   const { id } = useParams();
   // console.log(id);
   const { project, isLoading, error } = useProject(id);
+  const pledgeLink = `/pledges/${id}`;
 
   // console.log(project);
   if (isLoading) {
@@ -27,7 +28,7 @@ function ProjectPage() {
           </li>
         ))}
       </ul>
-      <Link to="/pledges/">
+      <Link to={pledgeLink}>
         <button>pledge</button>
       </Link>
     </div>

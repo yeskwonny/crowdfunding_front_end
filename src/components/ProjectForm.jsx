@@ -1,7 +1,6 @@
 import { useState } from "react";
 import postCreateProject from "../api/post-project";
-import useAuth from "../hooks/use-auth";
-
+//!todo: check image, loading bar, status messge
 function ProjectForm() {
   const [project, setProject] = useState({
     title: "",
@@ -24,7 +23,7 @@ function ProjectForm() {
     try {
       const { title, director, genres, synopsis, is_open, target, targetDate } =
         project;
-      const goal = +target;
+      
       const response = await postCreateProject(
         title,
         director,

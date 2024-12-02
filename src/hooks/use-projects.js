@@ -7,15 +7,17 @@ export default function useProjects() {
   const [error, setError] = useState();
 
   useEffect(() => {
-    getProjects()
-      .then((projects) => {
-        setProjects(projects);
+    const fetchProject = async () => {
+      try {
+        const data = await getProjects();
+        setProjects(data);
+      } catch (e) {
+        setError(e);
+      } finally {
         setIsLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setIsLoading(false);
-      });
+      }
+    };
+    fetchProject();
   }, []);
 
   return { projects, isLoading, error };

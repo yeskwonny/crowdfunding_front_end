@@ -1,5 +1,7 @@
 import { useState } from "react";
 import postCreateProject from "../api/post-project";
+import InputField from "./InputField";
+import Button from "./Button";
 //!todo: check image, loading bar, status messge
 function ProjectForm() {
   const [project, setProject] = useState({
@@ -11,14 +13,14 @@ function ProjectForm() {
     is_open: true,
     targetDate: "",
   });
-
-  function handleOnChange(e) {
+  console.log(project);
+  function handleChange(e) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "target" ? Number(value) : value });
     console.log(id, value);
   }
 
-  async function handleOnSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     try {
       const { title, director, genres, synopsis, is_open, target, targetDate } =
@@ -45,53 +47,62 @@ function ProjectForm() {
     <div>
       <form>
         <div className="movie-basic">
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
+          <InputField
             id="title"
             value={project.title}
-            onChange={handleOnChange}
-          ></input>
-          <label htmlFor="director">Director</label>
-          <input
             type="text"
+            onChange={handleChange}
+            label="Title"
+          />
+          <InputField
             id="director"
             value={project.director}
-            onChange={handleOnChange}
-          ></input>
+            type="text"
+            onChange={handleChange}
+            label="Director"
+          />
         </div>
         <div className="movie-detail">
-          <label htmlFor="genres">Genres</label>
-          <input
-            type="genres"
-            id="genres"
-            value={project.genres}
-            onChange={handleOnChange}
-          ></input>
-          <label htmlFor="synopsis">Movie Synopsis</label>
-          <input
-            type="text"
+          <InputField
             id="synopsis"
             value={project.synopsis}
-            onChange={handleOnChange}
-          ></input>
+            type="text"
+            onChange={handleChange}
+            label="Movie Synopsis"
+          />
+
           {/* <label htmlFor="image">Image</label>
           <input type="file" id="image" /> */}
         </div>
         <div className="movie-target">
-          <label htmlFor="target">Your target</label>
-          <input
-            type="number"
+          <InputField
             id="target"
             value={project.target}
-            onChange={handleOnChange}
-          ></input>
-          <label htmlFor="targetDate">target date</label>
-          <input type="date" id="targetDate" onChange={handleOnChange}></input>
+            type="number"
+            onChange={handleChange}
+            label="Your target"
+          />
+          <InputField
+            id="targetDate"
+            value={project.targetDate}
+            type="date"
+            onChange={handleChange}
+            label="Target Date"
+          />
+          //todo! change to select box
+          <InputField
+            id="genres"
+            value={project.genres}
+            type="text"
+            onChange={handleChange}
+            label="genres"
+          />
         </div>
-        <button type="submit" onClick={handleOnSubmit}>
-          Create a project
-        </button>
+        <Button
+          type="submit"
+          name="Create a Project"
+          onClick={handleSubmit}
+        ></Button>
       </form>
     </div>
   );

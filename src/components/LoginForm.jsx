@@ -2,6 +2,9 @@ import { useState } from "react";
 import postLogin from "../api/post-login";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
+// components
+import InputField from "./InputField";
+import Button from "./Button";
 
 function LoginForm() {
   const navigate = useNavigate();
@@ -35,15 +38,23 @@ function LoginForm() {
   return (
     <form>
       <div>
-        <label htmlFor="username">Username :</label>
-        <input type="text" id="username" onChange={handleChange}></input>
+        <InputField
+          id="username"
+          value={credentials.username}
+          type="text"
+          onChange={handleChange}
+          label="username"
+        />
 
-        <label htmlFor="password">Password :</label>
-        <input type="password" id="password" onChange={handleChange}></input>
+        <InputField
+          id="password"
+          value={credentials.password}
+          type="password"
+          onChange={handleChange}
+          label="password"
+        />
       </div>
-      <button type="submit" onClick={handleSubmit}>
-        Login
-      </button>
+      <Button type="submit" onClick={handleSubmit} name="Login"></Button>
     </form>
   );
 }

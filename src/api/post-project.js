@@ -37,6 +37,7 @@ async function postCreateProject(
         const errorMsg = data?.detail ?? fallbackError;
         throw new Error(errorMsg);
       } catch (parseError) {
+        console.error("API Error Response:", data);
         throw new Error(fallbackError);
       }
     }

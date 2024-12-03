@@ -22,6 +22,10 @@ const router = createBrowserRouter([
     element: <NavBar />,
     children: [
       { path: "/", element: <HomePage /> },
+      {
+        path: "/login",
+        element: <Login />,
+      },
       { path: "/signup", element: <Signup /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
@@ -29,10 +33,6 @@ const router = createBrowserRouter([
     ],
   },
   // don't need a nav
-  {
-    path: "/login",
-    element: <Login />,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(

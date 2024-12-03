@@ -1,9 +1,17 @@
 import { useState } from "react";
-import postSignUp from "../api/post-signup";
-import postLogin from "../api/post-login";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
+// hooks
+import postSignUp from "../api/post-signup";
+import postLogin from "../api/post-login";
+
+//component
+import InputField from "./InputField";
+import Button from "./Button";
+
 function SignupForm() {
+  const navigate = useNavigate();
+  const { auth, setAuth } = useAuth();
   const [userInfo, setUserInfo] = useState({
     username: "",
     password: "",
@@ -11,8 +19,7 @@ function SignupForm() {
     lastname: "",
     email: "",
   });
-
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -29,8 +36,10 @@ function SignupForm() {
           userInfo.firstname,
           userInfo.lastname
         );
+        setIsLoading(true);
         const login = await postLogin(userInfo.username, userInfo.password);
         window.localStorage.setItem("token", login.token);
+        setAuth({ token: login.token });
 
         navigate("/");
       } catch (e) {
@@ -40,49 +49,45 @@ function SignupForm() {
   return (
     <form>
       <div>
-        <label htmlFor="username">Username :</label>
-        <input
-          type="text"
+        <InputField
           id="username"
-          onChange={handleChange}
           value={userInfo.username}
-        ></input>
+          type="text"
+          onChange={handleChange}
+          label="username"
+        />
 
-        <label htmlFor="password">Password :</label>
-        <input
-          type="password"
+        <InputField
           id="password"
           value={userInfo.password}
+          type="password"
           onChange={handleChange}
-        ></input>
-
-        <label htmlFor="firstname">First name :</label>
-        <input
-          type="text"
+          label="password"
+        />
+        <InputField
           id="firstname"
-          onChange={handleChange}
           value={userInfo.firstname}
-        ></input>
-
-        <label htmlFor="lastname">Last name :</label>
-        <input
           type="text"
+          onChange={handleChange}
+          label="firstname"
+        />
+        <InputField
           id="lastname"
-          onChange={handleChange}
           value={userInfo.lastname}
-        ></input>
-
-        <label htmlFor="email">Email:</label>
-        <input
           type="text"
-          id="email"
           onChange={handleChange}
+          label="lastname"
+        />
+
+        <InputField
+          id="email"
           value={userInfo.email}
-        ></input>
+          type="email"
+          onChange={handleChange}
+          label="email"
+        />
       </div>
-      <button type="submit" onClick={handleSubmit}>
-        Sign up
-      </button>
+      <Button type="submit" name="sign up" onClick={handleSubmit}></Button>
     </form>
   );
 }

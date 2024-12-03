@@ -7,7 +7,7 @@ const movieGenres = [
   "Drama",
   "Horror",
   "Romance",
-  "Science Fiction (Sci-Fi)",
+  "Science Fiction",
   "Fantasy",
   "Thriller",
   "Mystery",

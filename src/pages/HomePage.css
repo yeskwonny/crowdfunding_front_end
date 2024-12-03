@@ -1,16 +1,23 @@
 #project-list {
   display: grid;
   grid-template-columns: 30% 30% 30%;
-  column-gap: 10px;
-  row-gap: 10px;
-  padding: 0 3rem;
-  margin: 0 auto;
+  gap: 1rem;
   justify-content: center;
   margin-top: 2rem;
   padding-bottom: 2rem;
 }
+.top-pick-container {
+  display: flex;
+  justify-content: space-between;
+}
 
-.top-pick {
+.top-pick-container h3 {
   color: var(--color-red);
-  padding: 0 3rem;
+  padding: 0 2rem;
+}
+.top-pick-container :last-child {
+  color: var(--color-black);
+  font-weight: 400;
+  font-size: 0.9rem;
+  cursor: pointer;
 }

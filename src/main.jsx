@@ -4,8 +4,10 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // component
 import NavBar from "./Components/NavBar.jsx";
+
 // pages
 import HomePage from "./pages/HomePage.jsx";
+import Projects from "./pages/Projects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
@@ -27,6 +29,7 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       { path: "/signup", element: <Signup /> },
+      { path: "/projects", element: <Projects /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
       { path: "/pledges/:id", element: <NewPledge /> },

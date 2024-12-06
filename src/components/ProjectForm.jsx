@@ -10,6 +10,7 @@ function ProjectForm({ projectData = {}, onClick }) {
     title: "",
     director: "",
     genres: "",
+    image: "",
     movie_synopsis: "",
     goal: "",
     is_open: true,
@@ -19,9 +20,8 @@ function ProjectForm({ projectData = {}, onClick }) {
   console.log(projectData);
   console.log(project);
 
-
-// checking getting updated data or not
-// object keys in array
+  // checking getting updated data or not
+  // object keys in array
   useEffect(() => {
     if (Object.keys(projectData).length > 0) {
       setIsEdit(true);
@@ -40,9 +40,10 @@ function ProjectForm({ projectData = {}, onClick }) {
         title,
         director,
         genres,
+        image,
         movie_synopsis,
-        is_open,
         goal,
+        is_open,
         goal_deadline,
       } = project;
 
@@ -50,11 +51,11 @@ function ProjectForm({ projectData = {}, onClick }) {
         title,
         director,
         genres,
+        image,
         movie_synopsis,
-        //image,
-        is_open,
         goal,
-        goal_deadline
+        is_open,
+        goal_deadline,
       );
       console.log(response);
     } catch (error) {
@@ -108,6 +109,13 @@ function ProjectForm({ projectData = {}, onClick }) {
             type="date"
             onChange={handleChange}
             label="Target Date"
+          />
+          <InputField
+            id="image"
+            value={project.image}
+            type="text"
+            onChange={handleChange}
+            label="Image URL"
           />
           //todo! change to select box
           <InputField

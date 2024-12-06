@@ -2,9 +2,10 @@ export async function postCreateProject(
   title,
   director,
   genres,
+  image,
   movie_synopsis,
-  is_open,
   goal,
+  is_open,
   goal_deadline
 ) {
   const url = `${import.meta.env.VITE_API_URL}/projects/`;
@@ -22,9 +23,10 @@ export async function postCreateProject(
         title,
         director,
         genres,
+        image,
         movie_synopsis,
-        is_open,
         goal,
+        is_open,
         goal_deadline,
       }),
     });

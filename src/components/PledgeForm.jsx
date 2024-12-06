@@ -24,6 +24,7 @@ function PledgeForm({ id }) {
       const { project, amount, comment, anonymous } = pledge;
 
       const response = await postPledge(project, amount, comment, anonymous);
+      console.log(response);
     } catch (error) {
       console.error("Error trying to create a pledge:", error.message);
       throw new Error(error.message || "An unexpected error occurred.");

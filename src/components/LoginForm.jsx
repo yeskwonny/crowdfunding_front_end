@@ -27,9 +27,10 @@ function LoginForm() {
           credentials.username,
           credentials.password
         );
-        console.log(response);
+    
         window.localStorage.setItem("token", response.token);
-        setAuth({ token: response.token });
+        window.localStorage.setItem("user_id", response.user_id);
+        setAuth({ token: response.token, user_id: response.user_id });
         navigate("/");
       } catch (e) {
         console.error("Login error", e);

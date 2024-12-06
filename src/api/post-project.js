@@ -1,11 +1,11 @@
-async function postCreateProject(
+export async function postCreateProject(
   title,
   director,
   genres,
-  synopsis,
+  movie_synopsis,
   is_open,
-  target,
-  targetdDate
+  goal,
+  goal_deadline
 ) {
   const url = `${import.meta.env.VITE_API_URL}/projects/`;
 
@@ -22,10 +22,10 @@ async function postCreateProject(
         title,
         director,
         genres,
-        movie_synopsis: synopsis,
+        movie_synopsis,
         is_open,
-        goal: target,
-        goal_deadline: targetdDate,
+        goal,
+        goal_deadline,
       }),
     });
 
@@ -48,5 +48,3 @@ async function postCreateProject(
     throw new Error(error.message || "An unexpected error occurred.");
   }
 }
-
-export default postCreateProject;

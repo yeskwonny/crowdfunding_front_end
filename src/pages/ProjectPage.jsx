@@ -1,12 +1,20 @@
 import { useParams } from "react-router-dom";
 import useProject from "../hooks/use-project";
+import useAuth from "../hooks/use-auth";
 import { Link } from "react-router-dom";
 
 function ProjectPage() {
   const { id } = useParams();
+  const { auth, setAuth } = useAuth();
+  console.log(auth.user_id);
+
   // console.log(id);
   const { project, isLoading, error } = useProject(id);
+
+  const isOwner = project.owner == auth.user_id;
+
   const pledgeLink = `/pledges/${id}`;
+  const projectUpdateLink = `/projects/${id}`;
 
   // console.log(project);
   if (isLoading) {
@@ -31,6 +39,14 @@ function ProjectPage() {
       <Link to={pledgeLink}>
         <button>pledge</button>
       </Link>
+
+      {isOwner ? (
+        <Link to={projectUpdateLink}>
+          <button>update</button>
+        </Link>
+      ) : (
+        ""
+      )}
     </div>
   );
 }

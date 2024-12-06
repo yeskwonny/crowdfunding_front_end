@@ -9,6 +9,7 @@ import NavBar from "./Components/NavBar.jsx";
 import HomePage from "./pages/HomePage.jsx";
 import Projects from "./pages/Projects.jsx";
 import ProjectPage from "./pages/ProjectPage.jsx";
+import UpdateProject from "./pages/UpdateProject.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import NewProject from "./pages/NewProject.jsx";
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       },
       { path: "/signup", element: <Signup /> },
       { path: "/projects", element: <Projects /> },
+      { path: "/projects/:id", element: <UpdateProject /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
       { path: "/pledges/:id", element: <NewPledge /> },

@@ -1,40 +1,60 @@
-import { useState } from "react";
-import postCreateProject from "../api/post-project";
+import { useState, useEffect } from "react";
+import { postCreateProject } from "../api/post-project";
 import InputField from "./InputField";
 import Button from "./Button";
 //!todo: check image, loading bar, status messge
-function ProjectForm() {
+
+function ProjectForm({ projectData = {}, onClick }) {
+  const [IsEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState({
     title: "",
     director: "",
     genres: "",
-    synopsis: "",
-    target: "",
+    movie_synopsis: "",
+    goal: "",
     is_open: true,
-    targetDate: "",
+    goal_deadline: "",
+    ...projectData,
   });
+  console.log(projectData);
   console.log(project);
+
+
+// checking getting updated data or not
+// object keys in array
+  useEffect(() => {
+    if (Object.keys(projectData).length > 0) {
+      setIsEdit(true);
+    }
+  }, [projectData]);
+
   function handleChange(e) {
     const { id, value } = e.target;
-    setProject({ ...project, [id]: id === "target" ? Number(value) : value });
-    console.log(id, value);
+    setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
   }
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const { title, director, genres, synopsis, is_open, target, targetDate } =
-        project;
+      const {
+        title,
+        director,
+        genres,
+        movie_synopsis,
+        is_open,
+        goal,
+        goal_deadline,
+      } = project;
 
       const response = await postCreateProject(
         title,
         director,
         genres,
-        synopsis,
+        movie_synopsis,
         //image,
         is_open,
-        target,
-        targetDate
+        goal,
+        goal_deadline
       );
       console.log(response);
     } catch (error) {
@@ -64,8 +84,8 @@ function ProjectForm() {
         </div>
         <div className="movie-detail">
           <InputField
-            id="synopsis"
-            value={project.synopsis}
+            id="movie_synopsis"
+            value={project.movie_synopsis}
             type="text"
             onChange={handleChange}
             label="Movie Synopsis"
@@ -76,15 +96,15 @@ function ProjectForm() {
         </div>
         <div className="movie-target">
           <InputField
-            id="target"
-            value={project.target}
+            id="goal"
+            value={project.goal}
             type="number"
             onChange={handleChange}
             label="Your target"
           />
           <InputField
-            id="targetDate"
-            value={project.targetDate}
+            id="goal_deadline"
+            value={project.goal_deadline}
             type="date"
             onChange={handleChange}
             label="Target Date"
@@ -100,7 +120,7 @@ function ProjectForm() {
         </div>
         <Button
           type="submit"
-          name="Create a Project"
+          name={IsEdit ? "Edit" : "Create a Project"}
           onClick={handleSubmit}
         ></Button>
       </form>

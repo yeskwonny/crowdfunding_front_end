@@ -30,7 +30,7 @@ const slideImages = [
 const Slideshow = () => {
   return (
     <div className="slide-container">
-      <Slide>
+      <Slide duration={4000}>
         {slideImages.map((slideImage, index) => (
           <div key={index}>
             <div

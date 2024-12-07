@@ -36,7 +36,6 @@ function PledgeForm({ id, pledgeData = {} }) {
       const { id, project, amount, comment, anonymous } = pledge;
 
       if (isEdit) {
-        // 업데이트 요청
         const response = await putPledge(
           id,
           project,
@@ -46,7 +45,6 @@ function PledgeForm({ id, pledgeData = {} }) {
         );
         console.log("Pledge updated:", response);
       } else {
-        // 새 Pledge 생성 요청
         const response = await postPledge(project, amount, comment, anonymous);
         console.log("Pledge created:", response);
       }

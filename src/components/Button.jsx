@@ -1,3 +1,4 @@
+import "./Button.css";
 function Button({ type, name, onClick }) {
   return (
     <button type={type} onClick={onClick}>

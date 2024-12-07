@@ -33,7 +33,7 @@ const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/projects", element: <Projects /> },
       { path: "/projects/:id", element: <UpdateProject /> },
-      { path: "/pledges/:id", element: <UpdatePledge /> },
+      { path: "/pledge/:id", element: <UpdatePledge /> },
       { path: "/project", element: <NewProject /> },
       { path: "/project/:id", element: <ProjectPage /> },
       { path: "/pledges/:id", element: <NewPledge /> },

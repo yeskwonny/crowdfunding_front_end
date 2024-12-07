@@ -7,3 +7,16 @@
   height: 300px;
   object-fit: cover;
 }
+
+.project-card img:hover {
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3);
+  transform: scale(1.03);
+}
+
+.project-title {
+  display: flex;
+  justify-content: space-around;
+}
+.project-title h4 {
+  font-weight: 400;
+}

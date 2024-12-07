@@ -1,7 +1,7 @@
 .projects-container {
   display: grid;
   grid-template-columns: 30% 30% 30%;
-  gap: 1rem;
+  gap: 4rem;
   justify-content: center;
   margin-top: 2rem;
   padding-bottom: 2rem;

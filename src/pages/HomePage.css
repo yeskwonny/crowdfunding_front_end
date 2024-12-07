@@ -13,11 +13,11 @@
 
 .top-pick-container h3 {
   color: var(--color-red);
-  padding: 0 2rem;
+  padding: 0 3rem;
 }
 .top-pick-container :last-child {
   color: var(--color-black);
-  font-weight: 400;
+  font-weight: 600;
   font-size: 0.9rem;
   cursor: pointer;
 }

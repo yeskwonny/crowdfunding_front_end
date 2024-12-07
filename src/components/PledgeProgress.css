@@ -1,0 +1,22 @@
+.status-bar-container {
+  position: relative;
+  height: 18px;
+  background: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.status-bar {
+  height: 100%;
+  background: var(--color-red);
+}
+
+.status-percentage {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 10px;
+  line-height: 20px;
+}

@@ -6,7 +6,10 @@ import useProject from "../hooks/use-project";
 
 //pages
 import "./projectPage.css";
+// component
 import InfoDetail from "../components/InfoDetail";
+import Button from "../components/Button";
+import PledgeProgress from "../components/PledgeProgress";
 
 function ProjectPage() {
   const { id } = useParams();
@@ -44,20 +47,34 @@ function ProjectPage() {
       <div className="main-container">
         <img src={project.image}></img>
         <div className="pledge-detail">
-          <InfoDetail label="Goal" info={project.goal} />
-          <InfoDetail label="GoalDeadline" info={project.goal_deadline} />
-          <InfoDetail label="total pledge" info={project.total_pledges} />
-          <Link to={`/pledges/${id}`}>
-            <button>pledge</button>
-          </Link>
+          <InfoDetail
+            type="summary"
+            label="Funding Goal"
+            info={`$${project.goal}`}
+          />
 
-          {isOwner ? (
-            <Link to={projectUpdateLink}>
-              <button>update</button>
+          <InfoDetail
+            type="summary"
+            label="Total Raised"
+            info={`$${project.total_pledges}`}
+          />
+          <PledgeProgress
+            pledgeTotal={project.total_pledges}
+            goal={project.goal}
+          />
+          <InfoDetail
+            type="summary"
+            label="Deadline"
+            info={new Date(project.goal_deadline).toLocaleDateString()}
+          />
+          <div className="button-container">
+            <Link to={`/projects`}>
+              <Button name="Back" />
             </Link>
-          ) : (
-            ""
-          )}
+            <Link to={`/pledges/${id}`}>
+              <Button name="Make a Pledge" />
+            </Link>
+          </div>
         </div>
       </div>
       <div className="section-container">
@@ -67,6 +84,13 @@ function ProjectPage() {
           <h3>{`Status: ${project.is_open}`}</h3>
           <h3>movie synopsis</h3>
           <p>{project.movie_synopsis}</p>
+          {isOwner ? (
+            <Link to={projectUpdateLink}>
+              <Button name="Edit" />
+            </Link>
+          ) : (
+            ""
+          )}g
         </div>
         <h3>Pledges:</h3>
         <ul>
@@ -74,8 +98,8 @@ function ProjectPage() {
             <li key={key}>
               {pledgeData.amount} from {pledgeData.supporter}
               {pledgeData.supporter == auth.user_id ? (
-                <Link to={`/pledges/${pledgeData.id}`}>
-                  <button>Update</button>
+                <Link to={`/pledge/${pledgeData.id}`}>
+                  <Button name="Edit" />
                 </Link>
               ) : (
                 ""

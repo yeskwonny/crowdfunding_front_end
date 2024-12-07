@@ -4,7 +4,7 @@ import "./Navbar.css";
 
 function NavBar() {
   const { auth, setAuth } = useAuth();
-  console.log(auth.token);
+  // console.log(auth.token);
   function handleLogout() {
     window.localStorage.removeItem("token");
     setAuth({ token: null });

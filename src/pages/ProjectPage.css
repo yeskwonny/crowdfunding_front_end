@@ -1,0 +1,26 @@
+.container {
+}
+.title-container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.main-container {
+  justify-content: center;
+  display: flex;
+  margin: 0 auto;
+  gap: 2rem;
+}
+.main-container img {
+  width: 50%;
+  height: 500px;
+  object-fit: cover;
+}
+.pledge-detail {
+  display: flex;
+  flex-direction: column;
+}
+.section-container {
+  display: flex;
+}

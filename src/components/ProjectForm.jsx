@@ -5,7 +5,7 @@ import Button from "./Button";
 //!todo: check image, loading bar, status messge
 
 function ProjectForm({ projectData = {}, onClick }) {
-  const [IsEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState({
     title: "",
     director: "",
@@ -17,8 +17,8 @@ function ProjectForm({ projectData = {}, onClick }) {
     goal_deadline: "",
     ...projectData,
   });
-  console.log(projectData);
-  console.log(project);
+  // console.log(projectData);
+  // console.log(project);
 
   // checking getting updated data or not
   // object keys in array
@@ -55,7 +55,7 @@ function ProjectForm({ projectData = {}, onClick }) {
         movie_synopsis,
         goal,
         is_open,
-        goal_deadline,
+        goal_deadline
       );
       console.log(response);
     } catch (error) {
@@ -128,7 +128,7 @@ function ProjectForm({ projectData = {}, onClick }) {
         </div>
         <Button
           type="submit"
-          name={IsEdit ? "Edit" : "Create a Project"}
+          name={isEdit ? "Edit" : "Create a Project"}
           onClick={handleSubmit}
         ></Button>
       </form>

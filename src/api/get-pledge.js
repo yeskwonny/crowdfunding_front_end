@@ -1,5 +1,7 @@
-async function getPledges() {
-  const url = `${import.meta.env.VITE_API_URL}/pledges/`;
+async function getPledge(id) {
+  const url = `${import.meta.env.VITE_API_URL}/pledges/${id}`;
+  const token = window.localStorage.getItem("token");
+
   try {
     const response = await fetch(url, {
       method: "GET",
@@ -17,12 +19,12 @@ async function getPledges() {
       const errorMsg = data?.detail ?? fallbackError;
       throw new Error(errorMsg);
     }
-    const projects = await response.json();
-    return projects;
+    const pledges = await response.json();
+    return pledges;
   } catch (error) {
     console.error("Failed to fetch pledges:", error.message);
     throw error;
   }
 }
 
-export default getPledges;
+export default getPledge;

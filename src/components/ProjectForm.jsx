@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { postCreateProject } from "../api/post-project";
+import { updateProject } from "../api/put-project";
 import InputField from "./InputField";
 import Button from "./Button";
+import { useParams } from "react-router-dom";
 //!todo: check image, loading bar, status messge
 
-function ProjectForm({ projectData = {}, onClick }) {
+function ProjectForm({ projectData = {}, id }) {
   const [isEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState({
     title: "",
@@ -17,8 +19,8 @@ function ProjectForm({ projectData = {}, onClick }) {
     goal_deadline: "",
     ...projectData,
   });
-  // console.log(projectData);
-  // console.log(project);
+  console.log(projectData);
+  console.log(project);
 
   // checking getting updated data or not
   // object keys in array
@@ -46,6 +48,21 @@ function ProjectForm({ projectData = {}, onClick }) {
         is_open,
         goal_deadline,
       } = project;
+
+      if (isEdit) {
+        const response = await updateProject(
+          id,
+          title,
+          director,
+          genres,
+          image,
+          movie_synopsis,
+          goal,
+          is_open,
+          goal_deadline
+        );
+        console.log("Project updated:", response);
+      }
 
       const response = await postCreateProject(
         title,

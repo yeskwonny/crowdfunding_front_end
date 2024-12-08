@@ -16,8 +16,8 @@ function ProjectCard({ projectData, baseURL }) {
         goal={projectData.goal}
       />
       <div className="project-title">
-        <h4>Title: {projectData.title}</h4>
-        <h4>By {projectData.director}</h4>
+        <h4>{projectData.title}</h4>
+        <h4>{projectData.director}</h4>
       </div>
     </div>
   );

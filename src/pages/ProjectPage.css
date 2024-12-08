@@ -23,11 +23,16 @@
   padding: 2rem;
   gap: 14px;
 }
-.section-container {
+.section-title {
   display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  font-size: 2rem;
+  fill: var(--color-red);
 }
 .button-container {
   display: flex;
-  justify-content: center;
   gap: 1rem;
 }

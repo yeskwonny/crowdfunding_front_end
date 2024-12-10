@@ -16,7 +16,7 @@ async function postPledge(project, amount, comment, anonymous) {
         anonymous,
       }),
     });
-
+  
     if (!response.ok) {
       const fallbackError = "Error trying to create a pledge";
 

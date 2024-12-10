@@ -1,29 +1,6 @@
 import "../components/Menu.css";
 import { Link } from "react-router-dom";
-
-const movieGenres = [
-  "Action",
-  "Adventure",
-  "Comedy",
-  "Drama",
-  "Horror",
-  "Romance",
-  "Science Fiction",
-  "Fantasy",
-  "Thriller",
-  "Mystery",
-  "Crime",
-  "Animation",
-  "Documentary",
-  "Musical",
-  "War",
-  "Western",
-  "Romantic Comedy",
-  "Action Thriller",
-  "Horror Comedy",
-  "Superhero",
-  "Post-Apocalyptic",
-];
+import { movieGenres } from "../data";
 
 function Menu() {
   return (

@@ -3,16 +3,14 @@ import useAuth from "../hooks/use-auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 // hooks
-
 import useProject from "../hooks/use-project";
-
+import deleteProject from "../api/delete-project";
 //pages
 import "./ProjectPage.css";
 // component
 import InfoDetail from "../components/InfoDetail";
 import Button from "../components/Button";
 import PledgeProgress from "../components/PledgeProgress";
-import Dropdown from "../components/SelectBox";
 import { BiGridSmall } from "react-icons/bi";
 import SelectBox from "../components/SelectBox";
 

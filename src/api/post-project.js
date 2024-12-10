@@ -30,6 +30,12 @@ export async function postCreateProject(
         goal_deadline,
       }),
     });
+    if (response.status === 200) {
+      return {
+        success: true,
+        message: `Your project has been created.`,
+      };
+    }
 
     if (!response.ok) {
       const fallbackError = "Error trying to create a project";

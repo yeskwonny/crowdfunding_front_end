@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { postCreateProject } from "../api/post-project";
+import { useNavigate } from "react-router-dom";
 import { updateProject } from "../api/put-project";
 import InputField from "./InputField";
 import Button from "./Button";
 import { useParams } from "react-router-dom";
+import SelectBox from "./SelectBox";
+import { movieGenres } from "../data";
 //!todo: check image, loading bar, status messge
 
 function ProjectForm({ projectData = {}, id }) {
+  const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [project, setProject] = useState({
     title: "",
@@ -19,8 +23,7 @@ function ProjectForm({ projectData = {}, id }) {
     goal_deadline: "",
     ...projectData,
   });
-  console.log(projectData);
-  console.log(project);
+  const [resultMsg, setResultMsg] = useState("");
 
   // checking getting updated data or not
   // object keys in array
@@ -61,7 +64,7 @@ function ProjectForm({ projectData = {}, id }) {
           is_open,
           goal_deadline
         );
-        console.log("Project updated:", response);
+        setResultMsg("Project updated successfully!");
       }
 
       const response = await postCreateProject(
@@ -74,7 +77,11 @@ function ProjectForm({ projectData = {}, id }) {
         is_open,
         goal_deadline
       );
-      console.log(response);
+      setTimeout(() => {
+        navigate("/projects");
+      }, 2000);
+
+      setResultMsg("Project created successfully!");
     } catch (error) {
       console.error("Error trying to create a project:", error.message);
       throw new Error(error.message || "An unexpected error occurred.");
@@ -108,9 +115,6 @@ function ProjectForm({ projectData = {}, id }) {
             onChange={handleChange}
             label="Movie Synopsis"
           />
-
-          {/* <label htmlFor="image">Image</label>
-          <input type="file" id="image" /> */}
         </div>
         <div className="movie-target">
           <InputField
@@ -134,15 +138,20 @@ function ProjectForm({ projectData = {}, id }) {
             onChange={handleChange}
             label="Image URL"
           />
-          //todo! change to select box
-          <InputField
+          <label>Genres:</label>
+          <SelectBox
+            name="genres"
             id="genres"
-            value={project.genres}
-            type="text"
-            onChange={handleChange}
-            label="genres"
+            options={movieGenres.map((genre) => ({
+              value: genre.toLowerCase(),
+              label: genre,
+            }))}
+            onChange={(selectedGenre) =>
+              setProject({ ...project, genres: selectedGenre })
+            }
           />
         </div>
+        <p>{resultMsg}</p>
         <Button
           type="submit"
           name={isEdit ? "Edit" : "Create a Project"}

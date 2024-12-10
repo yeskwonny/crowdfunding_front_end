@@ -15,26 +15,36 @@ import PledgeProgress from "../components/PledgeProgress";
 import Dropdown from "../components/SelectBox";
 import { BiGridSmall } from "react-icons/bi";
 import SelectBox from "../components/SelectBox";
+
 function ProjectPage() {
   const { id } = useParams();
   const { auth, setAuth } = useAuth();
-  const navigator = useNavigate();
-  console.log(id);
+  const navigate = useNavigate();
 
-  // console.log(id);
   const { project, isLoading, error } = useProject(id);
-
-  // console.log(project.pledges);
-
   const isOwner = project.owner == auth.user_id;
-  const projectUpdateLink = `/projects/${id}`;
 
-  function handleDelete() {
-    deleteProject(id);
-    navigator(-1);
+  const options = [
+    { value: "edit", label: "Edit Project" },
+    { value: "delete", label: "Delete Project" },
+  ];
+
+  async function handleSelect(action) {
+    if (action === "edit") {
+      navigate(`/projects/${id}`);
+    }
+
+    if (action === "delete") {
+      const confirmed = window.confirm(
+        "Are you sure you want to delete this project?"
+      );
+      if (confirmed) {
+        const result = await deleteProject(id);
+        return { message: result.message };
+      }
+    }
   }
 
-  // console.log(project);
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -79,11 +89,10 @@ function ProjectPage() {
       <div className="section-container">
         {isOwner ? (
           <SelectBox
-            value1="Edit Project"
-            value2="Delete Project"
-            name="project"
-            id="project"
-            projectId={id}
+            options={options}
+            onChange={handleSelect}
+            name="projectActions"
+            id="projectActions"
           />
         ) : (
           ""
@@ -118,7 +127,7 @@ function ProjectPage() {
           {project.pledges.map((pledgeData, key) => (
             <div className="pledge-item-container" key={key}>
               <div className="pledge-item">
-                <h3>User name:{pledgeData.supporter}</h3>
+                <h3>Username:{pledgeData.supporter}</h3>
                 <h4>Amount:${pledgeData.amount}</h4>
                 <h4>Comment:{pledgeData.comment}</h4>
               </div>

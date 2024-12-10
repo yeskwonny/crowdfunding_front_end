@@ -1,5 +1,6 @@
 import "../components/Menu.css";
 import { Link } from "react-router-dom";
+
 const movieGenres = [
   "Action",
   "Adventure",
@@ -17,7 +18,7 @@ const movieGenres = [
   "Musical",
   "War",
   "Western",
-  "Romantic Comedy (Rom-Com)",
+  "Romantic Comedy",
   "Action Thriller",
   "Horror Comedy",
   "Superhero",
@@ -31,7 +32,7 @@ function Menu() {
         {movieGenres.map((genre, index) => {
           return (
             <Link
-              to={`/projects/genre/${genre.toLowerCase().replace(/\s+/g, "-")}`}
+              to={`/projects?genre=${genre.toLowerCase().replace(/\s+/g, "-")}`}
               key={index}
               className="menu-item"
             >

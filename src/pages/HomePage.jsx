@@ -15,7 +15,6 @@ function HomePage() {
   );
 
   const topThreeProjects = sortedProjects.slice(0, 3);
-
   console.log(sortedProjects);
   return (
     <div>

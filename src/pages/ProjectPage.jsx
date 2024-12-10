@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import useProject from "../hooks/use-project";
 
 //pages
-import "./projectPage.css";
+import "./ProjectPage.css";
 // component
 import InfoDetail from "../components/InfoDetail";
 import Button from "../components/Button";

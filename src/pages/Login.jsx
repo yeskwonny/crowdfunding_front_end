@@ -6,7 +6,7 @@ function Login() {
   return (
     <>
       <LoginFrom />
-      <div className="signup-container">
+      <div className="signup-link">
         <Link to="/signup" className="signup">
           Are you new to MakeCine?
         </Link>

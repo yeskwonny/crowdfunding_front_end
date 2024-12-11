@@ -5,9 +5,11 @@ import { putPledge } from "../api/put-pledge";
 // components
 import InputField from "../components/InputField";
 import Button from "./Button";
+import SelectBox from "./SelectBox";
 
 function PledgeForm({ id, pledgeData = {} }) {
   const [isEdit, setIsEdit] = useState(false);
+  const [error, setError] = useState({});
   const [pledge, setPledge] = useState({
     project: id ? id : null,
     amount: "",
@@ -15,14 +17,6 @@ function PledgeForm({ id, pledgeData = {} }) {
     anonymous: "",
     ...pledgeData,
   });
-  console.log(id);
-  console.log(pledgeData);
-  console.log(pledge);
-
-  function handleChange(e) {
-    const { id, value } = e.target;
-    setPledge({ ...pledge, [id]: id === "amount" ? +value : value });
-  }
 
   useEffect(() => {
     if (Object.keys(pledgeData).length > 0) {
@@ -30,8 +24,35 @@ function PledgeForm({ id, pledgeData = {} }) {
     }
   }, [pledgeData]);
 
+  function handleChange(e) {
+    const { id, value } = e.target;
+    setPledge({ ...pledge, [id]: id === "amount" ? +value : value });
+  }
+
+  function validateForm() {
+    const validationMsg = {};
+    if (pledge.amount < 0 || !pledge.amount) {
+      validationMsg.amount = "Amount must be a positive number";
+    }
+    if (!pledge.comment) {
+      validationMsg.comment = "Comment cannot be empty.";
+    }
+    if (pledge.anonymous !== "true" && pledge.anonymous !== "false") {
+      validationMsg.anonymous = 'Anonymous must be "true" or "false".';
+    }
+    setError(validationMsg);
+    return Object.keys(validationMsg).length === 0;
+  }
+  console.log(error);
+
   async function handleSubmit(e) {
     e.preventDefault();
+
+    // Validation 실행
+    if (!validateForm()) {
+      console.log("Validation failed");
+      return;
+    }
     try {
       const { id, project, amount, comment, anonymous } = pledge;
 
@@ -46,7 +67,6 @@ function PledgeForm({ id, pledgeData = {} }) {
         console.log("Pledge updated:", response);
       } else {
         const response = await postPledge(project, amount, comment, anonymous);
-        console.log("Pledge created:", response);
       }
     } catch (error) {
       console.error(
@@ -55,9 +75,13 @@ function PledgeForm({ id, pledgeData = {} }) {
       );
     }
   }
+  const options = [
+    { value: "true", label: "true" },
+    { value: "false", label: "false" },
+  ];
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <InputField
         type="number"
         id="amount"
@@ -65,6 +89,7 @@ function PledgeForm({ id, pledgeData = {} }) {
         value={pledge.amount}
         label="amount"
       />
+      {error.amount && <p className="error-message">{error.amount}</p>}
       <InputField
         type="text"
         id="comment"
@@ -72,18 +97,16 @@ function PledgeForm({ id, pledgeData = {} }) {
         value={pledge.comment}
         label="comment"
       />
-      <InputField
-        type="text"
-        id="anonymous"
-        onChange={handleChange}
-        value={pledge.anonymous}
-        label="anonymous"
+      {error.comment && <p className="error-message">{error.comment}</p>}
+      <SelectBox
+        options={options}
+        onChange={(selectedValue) =>
+          setPledge({ ...pledge, anonymous: selectedValue })
+        }
       />
-      <Button
-        type="submit"
-        onClick={handleSubmit}
-        name={isEdit ? "Edit" : "Create a Pledge"}
-      ></Button>
+      {error.anonymous && <p className="error-message">{error.anonymous}</p>}
+
+      <Button type="submit" name={isEdit ? "Edit" : "Create a Pledge"}></Button>
     </form>
   );
 }

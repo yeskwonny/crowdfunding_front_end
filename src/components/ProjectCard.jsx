@@ -3,9 +3,6 @@ import "./ProjectCard.css";
 import PledgeProgress from "./PledgeProgress";
 function ProjectCard({ projectData, baseURL }) {
   const projectLink = `/project/${projectData.id}`;
-  console.log(projectData);
-  const pledgeProgress = (projectData.pledge_total / projectData.goal) * 100;
-  console.log(pledgeProgress);
   return (
     <div className="project-card">
       <Link to={projectLink}>

@@ -12,9 +12,6 @@ function SelectBox({ options, onChange, name, id }) {
     if (onChange) {
       const result = await onChange(selectedValue);
       if (result?.message) setResultMsg(result.message);
-      setTimeout(() => {
-        navigate(-1); // 브라우저 이전 페이지로 이동
-      }, 2000);
     }
   }
 

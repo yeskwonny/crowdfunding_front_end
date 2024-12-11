@@ -7,6 +7,11 @@ import InputField from "../components/InputField";
 import Button from "./Button";
 import SelectBox from "./SelectBox";
 
+const options = [
+  { value: "true", label: "true" },
+  { value: "false", label: "false" },
+];
+
 function PledgeForm({ id, pledgeData = {} }) {
   const [isEdit, setIsEdit] = useState(false);
   const [error, setError] = useState({});
@@ -41,14 +46,15 @@ function PledgeForm({ id, pledgeData = {} }) {
       validationMsg.anonymous = 'Anonymous must be "true" or "false".';
     }
     setError(validationMsg);
+    // checking errmsg object is empty or not
+    // sending true or false
     return Object.keys(validationMsg).length === 0;
   }
-  console.log(error);
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // Validation 실행
+    // Validation
     if (!validateForm()) {
       console.log("Validation failed");
       return;
@@ -75,10 +81,6 @@ function PledgeForm({ id, pledgeData = {} }) {
       );
     }
   }
-  const options = [
-    { value: "true", label: "true" },
-    { value: "false", label: "false" },
-  ];
 
   return (
     <form onSubmit={handleSubmit}>

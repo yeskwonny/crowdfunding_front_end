@@ -6,6 +6,8 @@ import useAuth from "../hooks/use-auth";
 import InputField from "./InputField";
 import Button from "./Button";
 
+import "./LoginForm.css";
+
 function LoginForm() {
   const navigate = useNavigate();
   const { auth, setAuth } = useAuth();
@@ -27,7 +29,7 @@ function LoginForm() {
           credentials.username,
           credentials.password
         );
-    
+
         window.localStorage.setItem("token", response.token);
         window.localStorage.setItem("user_id", response.user_id);
         setAuth({ token: response.token, user_id: response.user_id });
@@ -38,13 +40,19 @@ function LoginForm() {
   }
   return (
     <form>
-      <div>
+      <div className="login-container">
         <InputField
           id="username"
           value={credentials.username}
           type="text"
           onChange={handleChange}
-          label="username"
+          label="Username"
+          style={{
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            width: "50%",
+            height: "30px",
+          }}
         />
 
         <InputField
@@ -52,10 +60,16 @@ function LoginForm() {
           value={credentials.password}
           type="password"
           onChange={handleChange}
-          label="password"
+          label="Password"
+          style={{
+            border: "1px solid #ccc",
+            borderRadius: "4px",
+            width: "50%",
+            height: "30px",
+          }}
         />
+        <Button type="submit" onClick={handleSubmit} name="Login"></Button>
       </div>
-      <Button type="submit" onClick={handleSubmit} name="Login"></Button>
     </form>
   );
 }

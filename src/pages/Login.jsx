@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import LoginFrom from "../components/LoginForm";
+import "./Login.css";
 
 function Login() {
   return (
-    <div>
+    <>
       <LoginFrom />
-      <Link to="/signup" className="signup">
-        Are you new to MakeCine?
-      </Link>
-    </div>
+      <div className="signup-container">
+        <Link to="/signup" className="signup">
+          Are you new to MakeCine?
+        </Link>
+      </div>
+    </>
   );
 }
 

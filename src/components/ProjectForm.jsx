@@ -32,7 +32,7 @@ function ProjectForm({ projectData = {}, id }) {
       setIsEdit(true);
     }
   }, [projectData]);
-
+  console.log(isEdit);
   function handleChange(e) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
@@ -53,6 +53,7 @@ function ProjectForm({ projectData = {}, id }) {
       } = project;
 
       if (isEdit) {
+        // 업데이트 로직
         const response = await updateProject(
           id,
           title,
@@ -65,26 +66,28 @@ function ProjectForm({ projectData = {}, id }) {
           goal_deadline
         );
         setResultMsg("Project updated successfully!");
+      } else {
+        // 새 프로젝트 생성 로직
+        const response = await postCreateProject(
+          title,
+          director,
+          genres,
+          image,
+          movie_synopsis,
+          goal,
+          is_open,
+          goal_deadline
+        );
+        setResultMsg("Project created successfully!");
       }
 
-      const response = await postCreateProject(
-        title,
-        director,
-        genres,
-        image,
-        movie_synopsis,
-        goal,
-        is_open,
-        goal_deadline
-      );
+      // 성공 후 네비게이션
       setTimeout(() => {
         navigate("/projects");
       }, 2000);
-
-      setResultMsg("Project created successfully!");
     } catch (error) {
-      console.error("Error trying to create a project:", error.message);
-      throw new Error(error.message || "An unexpected error occurred.");
+      console.error("Error trying to create/update a project:", error.message);
+      setResultMsg(error.message || "An unexpected error occurred.");
     }
   }
 

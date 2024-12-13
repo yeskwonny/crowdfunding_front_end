@@ -12,6 +12,7 @@ import { movieGenres } from "../data";
 function ProjectForm({ projectData = {}, id }) {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
+  const [error, setError] = useState({});
   const [project, setProject] = useState({
     title: "",
     director: "",
@@ -37,9 +38,43 @@ function ProjectForm({ projectData = {}, id }) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
   }
+  console.log(error);
+  function validateForm() {
+    const validationMsg = {};
+    if (!project.title) {
+      validationMsg.title = "Title can not be empty";
+    }
+    if (!project.director) {
+      validationMsg.director = "Comment can not be empty.";
+    }
+
+    if (!project.movie_synopsis) {
+      validationMsg.movie_synopsis = "Movie synopsis can not be empty";
+    }
+
+    if (project.goal < 0 || !project.goal) {
+      validationMsg.goal = "Target must be a positive number";
+    }
+
+    if (!project.goal_deadline) {
+      validationMsg.goal_deadline = "Date can not be empty";
+    }
+
+    if (!project.genres) {
+      validationMsg.genres = "Please select movie genere";
+    }
+    setError(validationMsg);
+    // checking errmsg object is empty or not
+    // sending true or false
+    return Object.keys(validationMsg).length === 0;
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!validateForm()) {
+      console.log("Validation failed");
+      return;
+    }
     try {
       const {
         title,
@@ -67,7 +102,6 @@ function ProjectForm({ projectData = {}, id }) {
         );
         setResultMsg("Project updated successfully!");
       } else {
-        // 새 프로젝트 생성 로직
         const response = await postCreateProject(
           title,
           director,
@@ -102,6 +136,7 @@ function ProjectForm({ projectData = {}, id }) {
             onChange={handleChange}
             label="Title"
           />
+          {error.title && <p>{error.title}</p>}
           <InputField
             id="director"
             value={project.director}
@@ -110,6 +145,8 @@ function ProjectForm({ projectData = {}, id }) {
             label="Director"
           />
         </div>
+
+        {error.director && <p>{error.director}</p>}
         <div className="movie-detail">
           <InputField
             id="movie_synopsis"
@@ -119,6 +156,7 @@ function ProjectForm({ projectData = {}, id }) {
             label="Movie Synopsis"
           />
         </div>
+        {error.movie_synopsis && <p>{error.movie_synopsis}</p>}
         <div className="movie-target">
           <InputField
             id="goal"
@@ -127,6 +165,7 @@ function ProjectForm({ projectData = {}, id }) {
             onChange={handleChange}
             label="Your target"
           />
+          {error.goal && <p>{error.goal}</p>}
           <InputField
             id="goal_deadline"
             value={project.goal_deadline}
@@ -134,6 +173,7 @@ function ProjectForm({ projectData = {}, id }) {
             onChange={handleChange}
             label="Target Date"
           />
+          {error.goal_deadline && <p>{error.goal_deadline}</p>}
           <InputField
             id="image"
             value={project.image}
@@ -153,6 +193,7 @@ function ProjectForm({ projectData = {}, id }) {
               setProject({ ...project, genres: selectedGenre })
             }
           />
+          {error.genres && <p>{error.genres}</p>}
         </div>
         <p>{resultMsg}</p>
         <Button

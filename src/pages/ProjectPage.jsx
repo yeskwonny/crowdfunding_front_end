@@ -13,11 +13,13 @@ import Button from "../components/Button";
 import PledgeProgress from "../components/PledgeProgress";
 import { BiGridSmall } from "react-icons/bi";
 import SelectBox from "../components/SelectBox";
+import { useState } from "react";
 
 function ProjectPage() {
   const { id } = useParams();
   const { auth, setAuth } = useAuth();
   const navigate = useNavigate();
+  const [errorMsg, setErrorMsg] = useState("");
 
   const { project, isLoading, error } = useProject(id);
   const isOwner = project.owner == auth.user_id;
@@ -43,6 +45,21 @@ function ProjectPage() {
     }
   }
 
+  function handlePledgeClick() {
+    if (isOwner) {
+      setErrorMsg("You cannot make a pledge for your own project.");
+      return; // 오너인 경우 페이지 이동 차단
+    }
+    if (auth.token && !isOwner) {
+      navigate(`/pledges/${id}`);
+    } else {
+      navigate("/login");
+    }
+  }
+
+  console.log(errorMsg);
+
+  // ! need to do loading status
   if (isLoading) {
     return <p>Loading</p>;
   }
@@ -78,11 +95,9 @@ function ProjectPage() {
             <Link to={`/projects`}>
               <Button name="Back" />
             </Link>
-            <Link to={auth.token ? "/project" : "/login"}>Start a project</Link>
-            <Link to={auth.token ? `/pledges/${id}` : "/login"}>
-              <Button name="Make a Pledge" />
-            </Link>
+            <Button onClick={handlePledgeClick} name="Make a Pledge" />
           </div>
+          {errorMsg && <p className="error-message">{errorMsg}</p>}
         </div>
       </div>
       <div className="section-container">

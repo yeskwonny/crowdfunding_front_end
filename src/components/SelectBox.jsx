@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SelectBox.css";
 
 function SelectBox({ options, onChange, name, id, option }) {
   const navigate = useNavigate();

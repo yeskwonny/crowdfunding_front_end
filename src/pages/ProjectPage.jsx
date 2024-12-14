@@ -23,12 +23,12 @@ function ProjectPage() {
 
   const { project, isLoading, error } = useProject(id);
   const isOwner = project.owner == auth.user_id;
-
+  // for select box
   const options = [
     { value: "edit", label: "Edit Project" },
     { value: "delete", label: "Delete Project" },
   ];
-
+  // handling selectbox for edit/ delete
   async function handleSelect(action) {
     if (action === "edit") {
       navigate(`/projects/${id}`);
@@ -48,7 +48,7 @@ function ProjectPage() {
   function handlePledgeClick() {
     if (isOwner) {
       setErrorMsg("You cannot make a pledge for your own project.");
-      return; // 오너인 경우 페이지 이동 차단
+      return;
     }
     if (auth.token && !isOwner) {
       navigate(`/pledges/${id}`);

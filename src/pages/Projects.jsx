@@ -19,6 +19,8 @@ function Projects() {
     return <div>Error loading projects: {error.message}</div>;
   }
 
+  // getting filtered array or get all projects
+
   const filteredProject = genre
     ? Array.isArray(projects) &&
       projects.filter(

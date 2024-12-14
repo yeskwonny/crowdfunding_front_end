@@ -1,11 +1,13 @@
+import { Link } from "react-router-dom";
+// compoents
 import ProjectCard from "../components/ProjectCard";
 import useProjects from "../hooks/use-projects";
 import AutoPlay from "../components/AutoPlay";
 import Menu from "../components/Menu";
 import "./HomePage.css";
-import { Link } from "react-router-dom";
 
 function HomePage() {
+  // get all projects
   const { projects } = useProjects();
 
   // getting top3 pledge total projects

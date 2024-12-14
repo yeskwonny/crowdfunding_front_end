@@ -104,11 +104,6 @@ Form validation
 
 ## Setup Instructions
 
-### Prerequisites
-
-- **Node.js** (>=14.x)
-- **npm** or **yarn**
-- Backend API URL
 
 ### Steps:
 
@@ -116,7 +111,7 @@ Form validation
 
    ```bash
    git clone https://github.com/yeskwonny/crowdfunding_front_end.git
-   cd movie-crowdfunding
+
    ```
 
 2. **Install Dependencies**:
@@ -126,17 +121,10 @@ Form validation
    ```
 
 3. **Configure Environment Variables**:
-   Create a `.env` file in the root directory with the following variables:
-
-   ```env
-   REACT_APP_API_BASE_URL=<your-backend-api-url>
-   REACT_APP_TOKEN_KEY=auth_token
-   ```
 
 4. **Start the Development Server**:
    ```bash
-   npm start
+   npm run dev
    ```
-   Access the app at [http://localhost:3000](http://localhost:3000).
 
 ---

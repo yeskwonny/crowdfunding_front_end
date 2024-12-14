@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./SelectBox.css";
 
-function SelectBox({ options, onChange, name, id }) {
+function SelectBox({ options, onChange, name, id, option }) {
   const navigate = useNavigate();
   const [resultMsg, setResultMsg] = useState("");
 
@@ -19,7 +19,7 @@ function SelectBox({ options, onChange, name, id }) {
     <div className="select">
       <div>{resultMsg}</div>
       <select name={name} id={id} onChange={handleChange}>
-        <option value="">Select an option</option>
+        <option value="">{option}</option>
         {options.map((option, index) => (
           <option key={index} value={option.value}>
             {option.label}

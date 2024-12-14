@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 // api
 import postPledge from "../api/post-pledges";
 import { putPledge } from "../api/put-pledge";
 // components
-import InputField from "../components/InputField";
+import InputField from "./InputField";
 import Button from "./Button";
 import SelectBox from "./SelectBox";
+import "./PledgeForm.css";
 
 const options = [
   { value: "true", label: "true" },
@@ -13,6 +15,7 @@ const options = [
 ];
 
 function PledgeForm({ id, pledgeData = {} }) {
+  const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [error, setError] = useState({});
   const [resultMsg, setResultMsg] = useState("");
@@ -23,7 +26,7 @@ function PledgeForm({ id, pledgeData = {} }) {
     anonymous: "",
     ...pledgeData,
   });
-
+  console.log(pledge);
   useEffect(() => {
     if (Object.keys(pledgeData).length > 0) {
       setIsEdit(true);
@@ -78,10 +81,14 @@ function PledgeForm({ id, pledgeData = {} }) {
           comment,
           anonymous
         );
-        console.log("Pledge updated:", response);
+        setResultMsg(response.message || "Pledge updated successfully!");
       } else {
         const response = await postPledge(project, amount, comment, anonymous);
+        setResultMsg(response.message || "Pledge created successfully!");
       }
+      setTimeout(() => {
+        navigate(`/project/${pledge.project}`);
+      }, 1500);
     } catch (error) {
       console.error(
         isEdit ? "Error updating the pledge:" : "Error creating the pledge:",
@@ -91,33 +98,37 @@ function PledgeForm({ id, pledgeData = {} }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="pledge-form" onSubmit={handleSubmit}>
       <InputField
         type="number"
         id="amount"
         onChange={handleChange}
         value={pledge.amount}
-        label="amount"
+        label="Amount"
       />
-      {error.amount && <p className="error-message">{error.amount}</p>}
+      {error.amount && <p className="error-msg">{error.amount}</p>}
       <InputField
         type="text"
         id="comment"
         onChange={handleChange}
         value={pledge.comment}
-        label="comment"
+        label="Comment"
       />
-      {error.comment && <p className="error-message">{error.comment}</p>}
-      <SelectBox
-        options={options}
-        onChange={(selectedValue) =>
-          setPledge({ ...pledge, anonymous: selectedValue })
-        }
-      />
-      {error.anonymous && <p className="error-message">{error.anonymous}</p>}
+      {error.comment && <p className="error-msg">{error.comment}</p>}
+      <div className="select-box">
+        <SelectBox
+          id="anonymous"
+          options={options}
+          option="Choose anonymous"
+          onChange={(selectedValue) =>
+            setPledge({ ...pledge, anonymous: selectedValue })
+          }
+        />
+      </div>
+      {error.anonymous && <p className="error-msg">{error.anonymous}</p>}
 
       <Button type="submit" name={isEdit ? "Edit" : "Create a Pledge"}></Button>
-      {}
+      <p className="result-msg">{resultMsg}</p>
     </form>
   );
 }

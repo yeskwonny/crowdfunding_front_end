@@ -157,7 +157,7 @@ function ProjectForm({ projectData = {}, id }) {
       // moves to project page
       setTimeout(() => {
         navigate("/projects");
-      }, 2000);
+      }, 1500);
     } catch (error) {
       console.error("Error trying to create/update a project:", error.message);
       setResultMsg(error.message || "An unexpected error occurred.");
@@ -166,7 +166,7 @@ function ProjectForm({ projectData = {}, id }) {
 
   return (
     <div>
-      <form>
+      <form className="project-form">
         <div className="movie-basic">
           <div className="instruction">
             <h3>Project title</h3>

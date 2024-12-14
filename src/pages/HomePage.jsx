@@ -8,14 +8,12 @@ import { Link } from "react-router-dom";
 function HomePage() {
   const { projects } = useProjects();
 
-  console.log(projects);
-
+  // getting top3 pledge total projects
   const sortedProjects = projects.sort(
     (a, b) => b.pledge_total - a.pledge_total
   );
-
   const topThreeProjects = sortedProjects.slice(0, 3);
-  console.log(sortedProjects);
+
   return (
     <div>
       <AutoPlay />

@@ -169,11 +169,13 @@ function ProjectForm({ projectData = {}, id }) {
       <form className="project-form">
         <div className="movie-basic">
           <div className="instruction">
-            <h3>Project title</h3>
+            <h3>Project info</h3>
             <p>
               Write a clear, brief title and subtitle to help people quickly
-              understand your project. Both will appear on your project and
-              pre-launch pages.
+              understand your project. Your title should convey the essence of
+              your project, while the subtitle provides additional context. Both
+              will appear prominently on your project and pre-launch pages,
+              ensuring potential supporters can grasp your idea instantly.
             </p>
           </div>
           <div className="movie-title">
@@ -194,19 +196,20 @@ function ProjectForm({ projectData = {}, id }) {
             />
 
             {error.director && <p className="error-msg">{error.director}</p>}
-
-            <SelectBox
-              name="genres"
-              id="genres"
-              options={movieGenres.map((genre) => ({
-                value: genre.toLowerCase(),
-                label: genre,
-              }))}
-              option="Select a genre"
-              onChange={(selectedGenre) =>
-                setProject({ ...project, genres: selectedGenre })
-              }
-            />
+            <div className="select-container">
+              <SelectBox
+                name="genres"
+                id="genres"
+                options={movieGenres.map((genre) => ({
+                  value: genre.toLowerCase(),
+                  label: genre,
+                }))}
+                option="Select a genre"
+                onChange={(selectedGenre) =>
+                  setProject({ ...project, genres: selectedGenre })
+                }
+              />
+            </div>
             {error.genres && <p className="error-msg">{error.genres}</p>}
           </div>
         </div>

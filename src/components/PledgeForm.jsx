@@ -26,7 +26,7 @@ function PledgeForm({ id, pledgeData = {} }) {
     anonymous: "",
     ...pledgeData,
   });
-  console.log(pledge);
+
   useEffect(() => {
     if (Object.keys(pledgeData).length > 0) {
       setIsEdit(true);

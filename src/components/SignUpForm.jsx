@@ -111,7 +111,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Username"
         />
-        {error.username && <p>{error.username}</p>}
+        {error.username && <p className="error-msg">{error.username}</p>}
         <InputField
           id="password"
           value={userInfo.password}
@@ -119,7 +119,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Password"
         />
-        {error.password && <p>{error.password}</p>}
+        {error.password && <p className="error-msg">{error.password}</p>}
         <InputField
           id="firstname"
           value={userInfo.firstname}
@@ -127,7 +127,7 @@ function SignupForm() {
           onChange={handleChange}
           label="First Name"
         />
-        {error.firstname && <p>{error.firstname}</p>}
+        {error.firstname && <p className="error-msg">{error.firstname}</p>}
         <InputField
           id="lastname"
           value={userInfo.lastname}
@@ -135,7 +135,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Last Name"
         />
-        {error.lastname && <p>{error.lastname}</p>}
+        {error.lastname && <p className="error-msg">{error.lastname}</p>}
         <InputField
           id="email"
           value={userInfo.email}
@@ -143,7 +143,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Email"
         />
-        {error.email && <p>{error.email}</p>}
+        {error.email && <p className="error-msg">{error.email}</p>}
         <Button type="submit" name="Sign Up" />
       </form>
     </div>

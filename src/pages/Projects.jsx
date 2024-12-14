@@ -6,16 +6,15 @@ import "./Projects.css";
 
 function Projects() {
   const { projects, isLoading, error } = useProjects();
-  console.log(projects);
+
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search); // 쿼리 파라미터 읽기
+  const searchParams = new URLSearchParams(location.search);
   const genre = searchParams.get("genre");
-  console.log(genre);
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  // 에러 처리
   if (error) {
     return <div>Error loading projects: {error.message}</div>;
   }
@@ -26,7 +25,7 @@ function Projects() {
         (project) => project.genres.toLowerCase() === genre.toLowerCase()
       )
     : projects;
-  console.log(filteredProject);
+
   return (
     <div className="projects-container">
       {filteredProject.length > 0 ? (

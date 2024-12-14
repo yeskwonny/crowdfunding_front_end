@@ -57,9 +57,6 @@ function ProjectPage() {
     }
   }
 
-  console.log(errorMsg);
-
-  // ! need to do loading status
   if (isLoading) {
     return <p>Loading</p>;
   }

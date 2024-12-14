@@ -1,11 +1,4 @@
 
-
-
-
-#genres {
-  width: 100%; /* Make SelectBox take full width of its container */
-}
-
 .project-form {
   width: 100%;
   margin: 2rem auto;
@@ -33,6 +26,8 @@
 .instruction p {
   color: #555;
   line-height: 1.5;
+  /* min-height: 120px;
+  min-width: 300px; */
 }
 
 /* Form Sections */
@@ -42,7 +37,7 @@
 .movie-image {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   gap: 2rem;
   background-color:#f9fae0;
   padding:1.5rem;
@@ -63,10 +58,8 @@
 
 /* Input Field and Select Box */
 .project-form input,
-.project-form input,
 .project-form textarea {
-
-  padding: 0.8rem;
+  padding: 0.1rem 0;
   font-size: 1rem;
   border: 1px solid black
   border-radius: 4px;
@@ -101,4 +94,8 @@
   font-size: 0.9rem;
   margin-top: -0.5rem;
 }
+.select-container{
+  margin-left: auto;
+}
+
 

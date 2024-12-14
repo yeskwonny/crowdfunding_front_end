@@ -5,7 +5,6 @@ import PledgeForm from "../components/PledgeForm";
 
 function NewPledge() {
   const { id } = useParams();
-  console.log(id);
 
   return (
     <div>

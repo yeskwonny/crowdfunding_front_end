@@ -4,11 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { updateProject } from "../api/put-project";
 import InputField from "./InputField";
 import Button from "./Button";
-import { useParams } from "react-router-dom";
 import SelectBox from "./SelectBox";
 import { movieGenres } from "../data";
 import useAuth from "../hooks/use-auth";
-//!todo: check image, loading bar, status messge
+import "./ProjectForm.css";
 
 function ProjectForm({ projectData = {}, id }) {
   const navigate = useNavigate();
@@ -84,7 +83,7 @@ function ProjectForm({ projectData = {}, id }) {
       validationMsg.title = "Title can not be empty";
     }
     if (!project.director) {
-      validationMsg.director = "Comment can not be empty.";
+      validationMsg.director = " Director can not be empty.";
     }
 
     if (!project.movie_synopsis) {
@@ -169,72 +168,124 @@ function ProjectForm({ projectData = {}, id }) {
     <div>
       <form>
         <div className="movie-basic">
-          <InputField
-            id="title"
-            value={project.title}
-            type="text"
-            onChange={handleChange}
-            label="Title"
-          />
-          {error.title && <p>{error.title}</p>}
-          <InputField
-            id="director"
-            value={project.director}
-            type="text"
-            onChange={handleChange}
-            label="Director"
-          />
+          <div className="instruction">
+            <h3>Project title</h3>
+            <p>
+              Write a clear, brief title and subtitle to help people quickly
+              understand your project. Both will appear on your project and
+              pre-launch pages.
+            </p>
+          </div>
+          <div className="movie-title">
+            <InputField
+              id="title"
+              value={project.title}
+              type="text"
+              onChange={handleChange}
+              label="Title"
+            />
+            {error.title && <p className="error-msg">{error.title}</p>}
+            <InputField
+              id="director"
+              value={project.director}
+              type="text"
+              onChange={handleChange}
+              label="Director"
+            />
+
+            {error.director && <p className="error-msg">{error.director}</p>}
+
+            <SelectBox
+              name="genres"
+              id="genres"
+              options={movieGenres.map((genre) => ({
+                value: genre.toLowerCase(),
+                label: genre,
+              }))}
+              onChange={(selectedGenre) =>
+                setProject({ ...project, genres: selectedGenre })
+              }
+            />
+            {error.genres && <p className="error-msg">{error.genres}</p>}
+          </div>
+        </div>
+        <div className="movie-synopsis">
+          <div className="instruction">
+            <h3>Movie Synopsis</h3>
+            <p>
+              Provide a brief summary of your movie's story. The synopsis should
+              highlight the main plot, key characters, and tone of the movie to
+              capture interest. Keep it concise and engaging for potential
+              supporters.
+            </p>
+          </div>
+          <div className="movie-detail">
+            <div className="movie-synopsis">
+              <textarea
+                id="movie_synopsis"
+                value={project.movie_synopsis}
+                onChange={handleChange}
+              />
+            </div>
+            {error.movie_synopsis && (
+              <p className="error-msg">{error.movie_synopsis}</p>
+            )}
+          </div>
+        </div>
+        <div className="movie-targets">
+          <div className="instruction">
+            <h3>Funding Goal and Deadline</h3>
+            <p>
+              Set a realistic funding goal for your project and choose a
+              deadline for your campaign. Your goal should reflect the minimum
+              amount you need to successfully produce your movie. Deadlines
+              create urgency and motivate backers to contribute on time.
+            </p>
+          </div>
+
+          <div className="movie-target">
+            <InputField
+              id="goal"
+              value={project.goal}
+              type="number"
+              onChange={handleChange}
+              label="Your target"
+            />
+            {error.goal && <p>{error.goal}</p>}
+            <InputField
+              id="goal_deadline"
+              value={project.goal_deadline}
+              type="date"
+              onChange={handleChange}
+              label="Target Date"
+            />
+            {error.goal_deadline && (
+              <p className="error-msg">{error.goal_deadline}</p>
+            )}
+          </div>
         </div>
 
-        {error.director && <p>{error.director}</p>}
-        <div className="movie-detail">
-          <InputField
-            id="movie_synopsis"
-            value={project.movie_synopsis}
-            type="text"
-            onChange={handleChange}
-            label="Movie Synopsis"
-          />
+        <div className="movie-image">
+          <div className="instruction">
+            <h3>Project Image</h3>
+            <p>
+              Upload an eye-catching image that visually represents your movie.
+              The image will appear on your project's main page and campaign
+              listings. Make sure to use a high-quality image (JPEG or PNG) with
+              a recommended resolution of 1920x1080 pixels.
+            </p>
+          </div>
+          <div className="movie-image-input">
+            <InputField
+              id="image"
+              value={project.image}
+              type="text"
+              onChange={handleChange}
+              label="Image URL"
+            />
+          </div>
         </div>
-        {error.movie_synopsis && <p>{error.movie_synopsis}</p>}
-        <div className="movie-target">
-          <InputField
-            id="goal"
-            value={project.goal}
-            type="number"
-            onChange={handleChange}
-            label="Your target"
-          />
-          {error.goal && <p>{error.goal}</p>}
-          <InputField
-            id="goal_deadline"
-            value={project.goal_deadline}
-            type="date"
-            onChange={handleChange}
-            label="Target Date"
-          />
-          {error.goal_deadline && <p>{error.goal_deadline}</p>}
-          <InputField
-            id="image"
-            value={project.image}
-            type="text"
-            onChange={handleChange}
-            label="Image URL"
-          />
-          <label>Genres:</label>
-          <SelectBox
-            name="genres"
-            id="genres"
-            options={movieGenres.map((genre) => ({
-              value: genre.toLowerCase(),
-              label: genre,
-            }))}
-            onChange={(selectedGenre) =>
-              setProject({ ...project, genres: selectedGenre })
-            }
-          />
-          {error.genres && <p>{error.genres}</p>}
-        </div>
+
         <p
           className={
             resultMsg.includes("failed") ? "error-message" : "success-message"

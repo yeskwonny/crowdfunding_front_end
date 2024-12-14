@@ -17,7 +17,7 @@ function LoginForm() {
   });
   const [error, setError] = useState({});
 
-  function handleChange(e) {
+  function handleChange(e) {  
     const { id, value } = e.target;
     setCredentials((prev) => ({ ...prev, [id]: value }));
 

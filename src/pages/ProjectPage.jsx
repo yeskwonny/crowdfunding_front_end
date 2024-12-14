@@ -104,6 +104,7 @@ function ProjectPage() {
         {isOwner ? (
           <SelectBox
             options={options}
+            option="Manage your project"
             onChange={handleSelect}
             name="projectActions"
             id="projectActions"
@@ -113,12 +114,11 @@ function ProjectPage() {
         )}
         <div className="movie-detail">
           <div className="section-title">
-            <BiGridSmall className="section-icon" />
             <h1>Movie</h1>
           </div>
           <InfoDetail label="Title" info={project.title} />
           <InfoDetail label="Director" info={project.director} />
-          <InfoDetail label="genres" info={project.genres} />
+          <InfoDetail label="Genres" info={project.genres} />
           <InfoDetail
             label="Create date"
             info={new Date(project.date_created).toLocaleDateString()}
@@ -128,14 +128,12 @@ function ProjectPage() {
             info={project.is_open ? "Open" : "Closed"}
           />
           <div className="section-title">
-            <BiGridSmall className="section-icon" />
             <h1>Story</h1>
           </div>
           <p>{project.movie_synopsis}</p>
         </div>
         <div className="pledge-container">
           <div className="section-title">
-            <BiGridSmall className="section-icon" />
             <h1>Support</h1>
           </div>
           {project.pledges.map((pledgeData, key) => (

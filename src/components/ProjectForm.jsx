@@ -202,6 +202,7 @@ function ProjectForm({ projectData = {}, id }) {
                 value: genre.toLowerCase(),
                 label: genre,
               }))}
+              option="Select a genre"
               onChange={(selectedGenre) =>
                 setProject({ ...project, genres: selectedGenre })
               }
@@ -251,7 +252,7 @@ function ProjectForm({ projectData = {}, id }) {
               onChange={handleChange}
               label="Your target"
             />
-            {error.goal && <p>{error.goal}</p>}
+            {error.goal && <p className="error-msg">{error.goal}</p>}
             <InputField
               id="goal_deadline"
               value={project.goal_deadline}

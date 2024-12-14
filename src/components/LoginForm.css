@@ -61,11 +61,12 @@ form {
   background-color: var(--color-red);
 }
 
-/* 에러 메시지 스타일 */
-.error-message {
-  font-size: 0.9rem;
-  margin-bottom: 10px;
-  text-align: center;
+.login-container .error-msg {
+  color: var(--color-red);
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  text-align: right;
+  width: 100%;
 }
 
 .signup-link {

@@ -18,14 +18,56 @@ function SignupForm() {
     email: "",
   });
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({});
 
   function handleChange(e) {
     const { id, value } = e.target;
     setUserInfo({ ...userInfo, [id]: value });
   }
+  function validateForm() {
+    const validationMsg = {};
 
+    if (!userInfo.username || userInfo.username.length < 3) {
+      validationMsg.username = "Username must be at least 3 characters long";
+    }
+
+    if (!userInfo.password || userInfo.username.length < 3) {
+      validationMsg.password = "Password must be at least 3 characters long";
+    }
+
+    if (
+      !userInfo.firstname ||
+      userInfo.firstname.length < 2 ||
+      /\d/.test(userInfo.firstname)
+    ) {
+      validationMsg.firstname =
+        "Firstname must be at least 2 characters long and cannot contain numbers";
+    }
+
+    if (
+      !userInfo.lastname ||
+      userInfo.lastname.length < 2 ||
+      /\d/.test(userInfo.lastname)
+    ) {
+      validationMsg.lastname =
+        "Lastname must be at least 2 characters long and cannot contain numbers";
+    }
+
+    if (!userInfo.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(userInfo.email)) {
+      validationMsg.email = "Please enter a valid email address";
+    }
+
+    setError(validationMsg);
+    // checking errmsg object is empty or not
+    // sending true or false
+    return Object.keys(validationMsg).length === 0;
+  }
   async function handleSubmit(e) {
     e.preventDefault();
+    if (!validateForm()) {
+      console.log("Validation failed");
+      return;
+    }
     if (userInfo.username && userInfo.password) {
       try {
         const response = await postSignUp(
@@ -61,6 +103,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Username"
         />
+        {error.username && <p>{error.username}</p>}
         <InputField
           id="password"
           value={userInfo.password}
@@ -68,6 +111,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Password"
         />
+        {error.password && <p>{error.password}</p>}
         <InputField
           id="firstname"
           value={userInfo.firstname}
@@ -75,6 +119,7 @@ function SignupForm() {
           onChange={handleChange}
           label="First Name"
         />
+        {error.firstname && <p>{error.firstname}</p>}
         <InputField
           id="lastname"
           value={userInfo.lastname}
@@ -82,6 +127,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Last Name"
         />
+        {error.lastname && <p>{error.lastname}</p>}
         <InputField
           id="email"
           value={userInfo.email}
@@ -89,6 +135,7 @@ function SignupForm() {
           onChange={handleChange}
           label="Email"
         />
+        {error.email && <p>{error.email}</p>}
         <Button type="submit" name="Sign Up" />
       </form>
     </div>

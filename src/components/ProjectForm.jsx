@@ -39,6 +39,36 @@ function ProjectForm({ projectData = {}, id }) {
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
   }
   console.log(error);
+
+  function validateForm() {
+    const validationMsg = {};
+    if (!project.title) {
+      validationMsg.title = "Title can not be empty";
+    }
+    if (!project.director) {
+      validationMsg.director = "Comment can not be empty.";
+    }
+
+    if (!project.movie_synopsis) {
+      validationMsg.movie_synopsis = "Movie synopsis can not be empty";
+    }
+
+    if (project.goal < 0 || !project.goal) {
+      validationMsg.goal = "Target must be a positive number";
+    }
+
+    if (!project.goal_deadline) {
+      validationMsg.goal_deadline = "Date can not be empty";
+    }
+
+    if (!project.genres) {
+      validationMsg.genres = "Please select movie genere";
+    }
+    setError(validationMsg);
+    // checking errmsg object is empty or not
+    // sending true or false
+    return Object.keys(validationMsg).length === 0;
+  }
   function validateForm() {
     const validationMsg = {};
     if (!project.title) {

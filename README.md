@@ -88,7 +88,7 @@ The **MakeCine** is a platform where users can create crowdfunding campaigns for
 ## Screenshots
 
 ![Project Screenshot](screenshots/filteringproject.png)
-![Project Screenshot](screenshots/formvalidation.png)
+![Project Screenshot](screenshots/form_validation.png)
 
 ---
 

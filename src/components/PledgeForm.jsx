@@ -32,6 +32,13 @@ function PledgeForm({ id, pledgeData = {} }) {
   function handleChange(e) {
     const { id, value } = e.target;
     setPledge({ ...pledge, [id]: id === "amount" ? +value : value });
+    if (error[id]) {
+      setError((prev) => {
+        const updatedError = { ...prev };
+        delete updatedError[id];
+        return updatedError;
+      });
+    }
   }
 
   function validateForm() {

@@ -23,6 +23,14 @@ function SignupForm() {
   function handleChange(e) {
     const { id, value } = e.target;
     setUserInfo({ ...userInfo, [id]: value });
+    // clear error msg when input is not empty
+    if (error[id]) {
+      setError((prev) => {
+        const updatedError = { ...prev };
+        delete updatedError[id];
+        return updatedError;
+      });
+    }
   }
   function validateForm() {
     const validationMsg = {};

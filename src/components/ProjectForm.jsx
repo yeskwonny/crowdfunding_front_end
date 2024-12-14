@@ -37,8 +37,15 @@ function ProjectForm({ projectData = {}, id }) {
   function handleChange(e) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
+    // clear error msg when input is not empty
+    if (error[id]) {
+      setError((prev) => {
+        const updatedError = { ...prev };
+        delete updatedError[id];
+        return updatedError;
+      });
+    }
   }
-  console.log(error);
 
   function validateForm() {
     const validationMsg = {};

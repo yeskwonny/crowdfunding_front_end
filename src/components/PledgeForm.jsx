@@ -15,6 +15,7 @@ const options = [
 function PledgeForm({ id, pledgeData = {} }) {
   const [isEdit, setIsEdit] = useState(false);
   const [error, setError] = useState({});
+  const [resultMsg, setResultMsg] = useState("");
   const [pledge, setPledge] = useState({
     project: id ? id : null,
     amount: "",
@@ -116,6 +117,7 @@ function PledgeForm({ id, pledgeData = {} }) {
       {error.anonymous && <p className="error-message">{error.anonymous}</p>}
 
       <Button type="submit" name={isEdit ? "Edit" : "Create a Pledge"}></Button>
+      {}
     </form>
   );
 }

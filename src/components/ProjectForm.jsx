@@ -137,7 +137,8 @@ function ProjectForm({ projectData = {}, id }) {
           is_open,
           goal_deadline
         );
-        setResultMsg("Project updated successfully!");
+        console.log(response.message);
+        setResultMsg(response.message || "Project created successfully!");
       } else {
         const response = await postCreateProject(
           title,
@@ -152,7 +153,7 @@ function ProjectForm({ projectData = {}, id }) {
         setResultMsg("Project created successfully!");
       }
 
-      // 성공 후 네비게이션
+      // moves to project page
       setTimeout(() => {
         navigate("/projects");
       }, 2000);
@@ -232,7 +233,13 @@ function ProjectForm({ projectData = {}, id }) {
           />
           {error.genres && <p>{error.genres}</p>}
         </div>
-        <p>{resultMsg}</p>
+        <p
+          className={
+            resultMsg.includes("failed") ? "error-message" : "success-message"
+          }
+        >
+          {resultMsg}
+        </p>
         <Button
           type="submit"
           name={isEdit ? "Edit" : "Create a Project"}

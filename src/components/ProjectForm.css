@@ -78,13 +78,14 @@
   border-radius: 4px;
   outline: none;
 }
-
-textarea {
+.movie-synopsis-text{
+  width:48%;
+}
+.project-form textarea {
     resize: vertical;
     width:100%;
     min-height: 100px; /* Minimum height */
-    max-height: 200px; /* Optional max height for consistency */
-    padding: 0.8rem;
+    max-height: 300px; /* Optional max height for consistency */
     font-size: 1rem;
     border: 1px solid black;
     border-radius: 4px;
@@ -98,7 +99,6 @@ textarea {
 .error-msg {
   color: var(--color-red);
   font-size: 0.8rem;
-  margin-top: -0.5rem;
   text-align: right;
 }
 

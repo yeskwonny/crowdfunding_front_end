@@ -220,19 +220,19 @@ function ProjectForm({ projectData = {}, id }) {
               supporters.
             </p>
           </div>
-          <div className="movie-detail">
-            <div className="movie-synopsis">
-              <textarea
-                id="movie_synopsis"
-                value={project.movie_synopsis}
-                onChange={handleChange}
-              />
-            </div>
+
+          <div className="movie-synopsis-text">
+            <textarea
+              id="movie_synopsis"
+              value={project.movie_synopsis}
+              onChange={handleChange}
+            />
             {error.movie_synopsis && (
               <p className="error-msg">{error.movie_synopsis}</p>
             )}
           </div>
         </div>
+
         <div className="movie-targets">
           <div className="instruction">
             <h3>Funding Goal and Deadline</h3>

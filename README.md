@@ -45,7 +45,6 @@ The **MakeCine** is a platform where users can create crowdfunding campaigns for
        - Anonymous must be set to "true" or "false".
    - Error messages are displayed inline for user-friendly feedback.
 
-
 ---
 
 ## Technologies Used
@@ -67,6 +66,37 @@ The **MakeCine** is a platform where users can create crowdfunding campaigns for
 - Custom Hooks (`useAuth`, `useProject`)
 
 ---
+
+## Usage
+
+1. **Creating a Project**:
+
+   - Navigate to the "Start a Project" page.
+   - Fill out the form with movie details (title, director, goal, synopsis).
+   - Submit the form to create a new project.
+
+2. **Pledging**:
+
+   - Visit a project's detail page.
+   - Click on "Make a Pledge" and enter the pledge amount, comment, and anonymity preference.
+
+3. **Editing or Deleting Projects**:
+   - Project owners can use the dropdown to edit or delete their projects.
+
+---
+
+## Screenshots
+
+![Project Screenshot](screenshots/filteringproject.png)
+![Project Screenshot](screenshots/formvalidation.png)
+
+---
+
+## Future Enhancements
+
+- **User Profiles**: Enable users to manage their created projects and pledges.
+- **Search and Filter**: Add functionality to filter projects by genre or funding status.
+- **Responsive design**: Enable reponsive design for mobile and small screen users
 
 ## Setup Instructions
 
@@ -106,29 +136,3 @@ The **MakeCine** is a platform where users can create crowdfunding campaigns for
    Access the app at [http://localhost:3000](http://localhost:3000).
 
 ---
-
-
-## Usage
-
-1. **Creating a Project**:
-
-   - Navigate to the "Start a Project" page.
-   - Fill out the form with movie details (title, director, goal, synopsis).
-   - Submit the form to create a new project.
-
-2. **Pledging**:
-
-   - Visit a project's detail page.
-   - Click on "Make a Pledge" and enter the pledge amount, comment, and anonymity preference.
-
-3. **Editing or Deleting Projects**:
-   - Project owners can use the dropdown to edit or delete their projects.
-
----
-
-## Future Enhancements
-
-- **User Profiles**: Enable users to manage their created projects and pledges.
-- **Search and Filter**: Add functionality to filter projects by genre or funding status.
-- **Responsive design**: Enable reponsive design for mobile and small screen users
-

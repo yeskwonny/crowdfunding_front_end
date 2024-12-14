@@ -78,7 +78,8 @@ function ProjectPage() {
             <Link to={`/projects`}>
               <Button name="Back" />
             </Link>
-            <Link to={`/pledges/${id}`}>
+            <Link to={auth.token ? "/project" : "/login"}>Start a project</Link>
+            <Link to={auth.token ? `/pledges/${id}` : "/login"}>
               <Button name="Make a Pledge" />
             </Link>
           </div>

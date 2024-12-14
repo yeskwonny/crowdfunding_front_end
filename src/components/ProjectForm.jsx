@@ -7,12 +7,14 @@ import Button from "./Button";
 import { useParams } from "react-router-dom";
 import SelectBox from "./SelectBox";
 import { movieGenres } from "../data";
+import useAuth from "../hooks/use-auth";
 //!todo: check image, loading bar, status messge
 
 function ProjectForm({ projectData = {}, id }) {
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState(false);
   const [error, setError] = useState({});
+  const { auth, setAuth } = useAuth();
   const [project, setProject] = useState({
     title: "",
     director: "",
@@ -33,7 +35,7 @@ function ProjectForm({ projectData = {}, id }) {
       setIsEdit(true);
     }
   }, [projectData]);
-  console.log(isEdit);
+
   function handleChange(e) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });

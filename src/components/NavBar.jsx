@@ -17,7 +17,7 @@ function NavBar() {
           MakeCine
         </Link>
         <div className="sub-cat">
-          <Link to="/project">Start a project</Link>
+          <Link to={auth.token ? "/project" : "/login"}>Start a project</Link>
           {auth.token ? (
             <Link to="/" onClick={handleLogout}>
               Logout

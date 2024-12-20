@@ -27,10 +27,24 @@ function ProjectForm({ projectData = {}, id }) {
   });
   const [resultMsg, setResultMsg] = useState("");
 
+  // change date format for input field
+  function formatDateForInput(date) {
+    if (!date) return "";
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   // checking getting updated data or not
   // object keys in array
   useEffect(() => {
     if (Object.keys(projectData).length > 0) {
+      setProject({
+        ...projectData,
+        goal_deadline: formatDateForInput(projectData.goal_deadline),
+      });
       setIsEdit(true);
     }
   }, [projectData]);
@@ -39,6 +53,7 @@ function ProjectForm({ projectData = {}, id }) {
     const { id, value } = e.target;
     setProject({ ...project, [id]: id === "goal" ? Number(value) : value });
     // clear error msg when input is not empty
+    // getting id from e.target
     if (error[id]) {
       setError((prev) => {
         const updatedError = { ...prev };
@@ -48,6 +63,8 @@ function ProjectForm({ projectData = {}, id }) {
     }
   }
 
+  console.log(projectData);
+  // validation
   function validateForm() {
     const validationMsg = {};
     if (!project.title) {
@@ -77,36 +94,8 @@ function ProjectForm({ projectData = {}, id }) {
     // sending true or false
     return Object.keys(validationMsg).length === 0;
   }
-  function validateForm() {
-    const validationMsg = {};
-    if (!project.title) {
-      validationMsg.title = "Title can not be empty";
-    }
-    if (!project.director) {
-      validationMsg.director = " Director can not be empty.";
-    }
 
-    if (!project.movie_synopsis) {
-      validationMsg.movie_synopsis = "Movie synopsis can not be empty";
-    }
-
-    if (project.goal < 0 || !project.goal) {
-      validationMsg.goal = "Target must be a positive number";
-    }
-
-    if (!project.goal_deadline) {
-      validationMsg.goal_deadline = "Date can not be empty";
-    }
-
-    if (!project.genres) {
-      validationMsg.genres = "Please select movie genere";
-    }
-    setError(validationMsg);
-    // checking errmsg object is empty or not
-    // sending true or false
-    return Object.keys(validationMsg).length === 0;
-  }
-
+  //handle submit form
   async function handleSubmit(e) {
     e.preventDefault();
     if (!validateForm()) {
@@ -138,8 +127,8 @@ function ProjectForm({ projectData = {}, id }) {
           is_open,
           goal_deadline
         );
-        console.log(response.message);
-        setResultMsg(response.message || "Project created successfully!");
+
+        setResultMsg(response.message || "Project updated successfully!");
       } else {
         const response = await postCreateProject(
           title,
@@ -200,6 +189,7 @@ function ProjectForm({ projectData = {}, id }) {
               <SelectBox
                 name="genres"
                 id="genres"
+                value={project.genres}
                 options={movieGenres.map((genre) => ({
                   value: genre.toLowerCase(),
                   label: genre,

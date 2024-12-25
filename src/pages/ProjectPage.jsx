@@ -10,19 +10,21 @@ import InfoDetail from "../components/InfoDetail";
 import Button from "../components/Button";
 import PledgeProgress from "../components/PledgeProgress";
 import SelectBox from "../components/SelectBox";
-import { PiHandHeartBold } from "react-icons/pi";
 import { useState } from "react";
+import PledgeList from "../components/PledgeList";
 
 function ProjectPage() {
   const { id } = useParams();
   const { auth } = useAuth();
   const navigate = useNavigate();
-  
+
   const [errorMsg, setErrorMsg] = useState("");
 
   const { project, isLoading, error } = useProject(id);
-  const isOwner = project.owner === auth.user_id;
+  const isOwner = String(project.owner) === String(auth.user_id);
 
+  console.log(isOwner);
+  console.log(auth);
   const options = [
     { value: "edit", label: "Edit Project" },
     { value: "delete", label: "Delete Project" },
@@ -64,16 +66,6 @@ function ProjectPage() {
 
   return (
     <div className="container">
-      {isOwner && (
-        <SelectBox
-          options={options}
-          option="Manage your project"
-          onChange={handleSelect}
-          name="projectActions"
-          id="projectActions"
-        />
-      )}
-
       <main className="main-container">
         <section className="movie-info-container">
           <img
@@ -83,6 +75,17 @@ function ProjectPage() {
           />
 
           <div className="movie-detail">
+            <div className="selectbox">
+              {isOwner && (
+                <SelectBox
+                  options={options}
+                  option="Manage your project"
+                  onChange={handleSelect}
+                  name="projectActions"
+                  id="projectActions"
+                />
+              )}
+            </div>
             <div className="section-title">
               <h1>Movie</h1>
             </div>
@@ -132,20 +135,7 @@ function ProjectPage() {
               {errorMsg && <p className="error-message">{errorMsg}</p>}
             </div>
 
-            <div className="pledge-list">
-              {project.pledges.map((pledgeData, key) => (
-                <div className="pledge-item-container" key={key}>
-                  <div className="pledge-item">
-                    <div className="pledge-name">
-                      <PiHandHeartBold />
-                      <h3>Username: {pledgeData.supporter}</h3>
-                    </div>
-                    <h4>Amount: ${pledgeData.amount}</h4>
-                    <h4>Comment: {pledgeData.comment}</h4>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <PledgeList pledges={project.pledges} />
           </div>
         </aside>
       </main>

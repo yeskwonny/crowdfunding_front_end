@@ -1,13 +1,13 @@
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-
 }
 
-
+.section-title {
+  border-bottom: 3px solid var(--color-red);
+}
 
 .main-container {
   display: flex;
@@ -29,24 +29,41 @@
 .button-container {
   display: flex;
   gap: 10px;
+  width: 100%;
   margin-top: 20px;
 }
 
-.movie-detail{
+.movie-detail {
   position: relative;
 }
 
-.selectbox{
+.selectbox {
   position: absolute;
-  right:0
-  }
+  right: 0;
+}
 
+.pledge-detail p:first-child {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.pledge-detail p :last-child {
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #ccc;
+}
 .error-message {
-  color: var(--color-red),
+  color: var(--color-red);
   margin-top: 10px;
   font-weight: bold;
 }
 
+.movie-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* media query */
 @media (max-width: 768px) {
   .main-container {
     flex-direction: column;

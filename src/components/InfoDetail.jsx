@@ -1,8 +1,9 @@
 function InfoDetail({ label, info, type }) {
   const typeStyles = {
-    summary: { fontSize: "20px", fontWeight: "500" },
+    summary: { fontSize: "14px" },
     input: { fontSize: "16px", color: "#555", borderBottom: "1px solid #ddd" },
     list: { fontSize: "14px", color: "#777", lineHeight: "1.5" },
+    
   };
 
   return (

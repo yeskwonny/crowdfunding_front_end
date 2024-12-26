@@ -1,30 +1,28 @@
-// 필요 라이브러리 및 커스텀 훅 불러오기
+// custom hooks
 import { useNavigate, useParams, Link } from "react-router-dom";
 import useAuth from "../hooks/use-auth";
 import useProject from "../hooks/use-project";
 import deleteProject from "../api/delete-project";
 // CSS
 import "./ProjectPage.css";
-// 컴포넌트
+// componets
 import InfoDetail from "../components/InfoDetail";
 import Button from "../components/Button";
 import PledgeProgress from "../components/PledgeProgress";
 import SelectBox from "../components/SelectBox";
 import { useState } from "react";
 import PledgeList from "../components/PledgeList";
-
+import { MdAttachMoney } from "react-icons/md";
 function ProjectPage() {
   const { id } = useParams();
   const { auth } = useAuth();
   const navigate = useNavigate();
 
   const [errorMsg, setErrorMsg] = useState("");
-
   const { project, isLoading, error } = useProject(id);
+
   const isOwner = String(project.owner) === String(auth.user_id);
 
-  console.log(isOwner);
-  console.log(auth);
   const options = [
     { value: "edit", label: "Edit Project" },
     { value: "delete", label: "Delete Project" },
@@ -40,7 +38,8 @@ function ProjectPage() {
       );
       if (confirmed) {
         const result = await deleteProject(id);
-        return { message: result.message };
+        setErrorMsg(result.message);
+        navigate("/projects");
       }
     }
   }
@@ -56,6 +55,13 @@ function ProjectPage() {
       navigate("/login");
     }
   }
+
+  function changeNumFormat(num) {
+    const newFormat = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return newFormat;
+  }
+
+  // !todo:need loading status
 
   if (isLoading) {
     return <p>Loading</p>;
@@ -89,17 +95,25 @@ function ProjectPage() {
             <div className="section-title">
               <h1>Movie</h1>
             </div>
-            <InfoDetail label="Title" info={project.title} />
-            <InfoDetail label="Director" info={project.director} />
-            <InfoDetail label="Genres" info={project.genres} />
-            <InfoDetail
-              label="Create date"
-              info={new Date(project.date_created).toLocaleDateString()}
-            />
-            <InfoDetail
-              label="Status"
-              info={project.is_open ? "Open" : "Closed"}
-            />
+            <div className="movie-container">
+              <InfoDetail label="Title" info={project.title} type="summary" />
+              <InfoDetail
+                label="Director"
+                info={project.director}
+                type="summary"
+              />
+              <InfoDetail label="Genres" info={project.genres} type="summary" />
+              <InfoDetail
+                label="Create date"
+                info={new Date(project.date_created).toLocaleDateString()}
+                type="summary"
+              />
+              <InfoDetail
+                label="Status"
+                info={project.is_open ? "Open" : "Closed"}
+                type="summary"
+              />
+            </div>
 
             <div className="section-title">
               <h1>Story</h1>
@@ -111,8 +125,8 @@ function ProjectPage() {
         <aside className="pledge-side-bar">
           <div className="pledge-container">
             <div className="pledge-detail">
-              <p>${project.total_pledges} raised</p>
-              <p>${project.goal} target</p>
+              <p>${changeNumFormat(project.total_pledges)} raised</p>
+              <p>${changeNumFormat(project.goal)} target</p>
 
               <PledgeProgress
                 pledgeTotal={project.total_pledges}
@@ -126,9 +140,6 @@ function ProjectPage() {
               />
 
               <div className="button-container">
-                <Link to={`/projects`}>
-                  <Button name="Back" />
-                </Link>
                 <Button onClick={handlePledgeClick} name="Make a Pledge" />
               </div>
 

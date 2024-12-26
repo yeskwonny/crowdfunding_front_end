@@ -21,7 +21,8 @@
 
 .movie-poster {
   width: 100%;
-  height: auto;
+  height: 40%;
+  object-fit: cover;
   display: block;
   margin-bottom: 20px;
 }

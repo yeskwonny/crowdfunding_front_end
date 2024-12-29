@@ -118,7 +118,7 @@ function ProjectPage() {
             <div className="section-title">
               <h1>Story</h1>
             </div>
-            <p>{project.movie_synopsis}</p>
+            <p className="movie-synop">{project.movie_synopsis}</p>
           </div>
         </section>
 

@@ -24,21 +24,21 @@ async function postSignUp(username, password, email, firstname, lastname) {
     });
 
     if (!response.ok) {
-      const fallbackError = "Error trying to Signup";
-
-      try {
-        const data = await response.json();
-        const errorMsg = data?.detail ?? fallbackError;
-        throw new Error(errorMsg);
-      } catch (parseError) {
-        throw new Error(fallbackError);
+      const contentType = response.headers.get("Content-Type");
+      if (contentType && contentType.includes("application/json")) {
+        const errorData = await response.json(); // JSON 응답 처리
+        throw errorData;
+      } else {
+        // HTML 또는 다른 형식의 응답 처리
+        const errorText = await response.text();
+        throw new Error(`Unexpected response: ${errorText}`);
       }
     }
 
-    return await response.json();
+    return await response.json(); // 성공한 응답 반환
   } catch (error) {
-    console.error("Error during signup:", error.message);
-    throw new Error(error.message || "An unexpected error occurred.");
+    console.error("Error in postSignUp:", error);
+    throw error;
   }
 }
 

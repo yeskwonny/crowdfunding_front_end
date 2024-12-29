@@ -16,26 +16,24 @@ async function postPledge(project, amount, comment, anonymous) {
         anonymous,
       }),
     });
-  
+
     if (!response.ok) {
       const fallbackError = "Error trying to create a pledge";
+      let errorData;
 
       try {
-        const data = await response.json();
-        console.log(data);
-        const errorMsg = data?.detail ?? fallbackError;
-        throw new Error(errorMsg);
-        f;
-      } catch (error) {
-        console.error("API Error Response:", data);
-        throw new Error(fallbackError);
+        errorData = await response.json();
+        console.log(errorData);
+      } catch (parseError) {
+        errorData = { detail: fallbackError };
       }
+      throw { message: errorData?.detail || fallbackError, data: errorData };
     }
 
     return await response.json();
   } catch (error) {
     console.error("Error trying to create a pledge:", error.message);
-    throw new Error(error.message || "An unexpected error occurred.");
+    throw error; // Re-throw the error to handle it in the calling component.
   }
 }
 

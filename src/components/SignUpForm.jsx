@@ -19,6 +19,7 @@ function SignupForm() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
+  console.log(error);
 
   function handleChange(e) {
     const { id, value } = e.target;
@@ -85,6 +86,7 @@ function SignupForm() {
           userInfo.firstname,
           userInfo.lastname
         );
+        console.log(response);
         setIsLoading(true);
         const login = await postLogin(userInfo.username, userInfo.password);
         window.localStorage.setItem("token", login.token);
@@ -92,6 +94,13 @@ function SignupForm() {
         navigate("/");
       } catch (e) {
         console.error("Sign up error", e);
+        if (e.username || e.email) {
+          setError(e);
+        } else {
+          setResultMsg("An unexpected error occurred. Please try again.");
+        }
+      } finally {
+        setIsLoading(false);
       }
     }
   }
@@ -112,6 +121,7 @@ function SignupForm() {
           label="Username"
         />
         {error.username && <p className="error-msg">{error.username}</p>}
+
         <InputField
           id="password"
           value={userInfo.password}
@@ -120,6 +130,7 @@ function SignupForm() {
           label="Password"
         />
         {error.password && <p className="error-msg">{error.password}</p>}
+
         <InputField
           id="firstname"
           value={userInfo.firstname}
@@ -128,6 +139,7 @@ function SignupForm() {
           label="First Name"
         />
         {error.firstname && <p className="error-msg">{error.firstname}</p>}
+
         <InputField
           id="lastname"
           value={userInfo.lastname}
@@ -136,6 +148,7 @@ function SignupForm() {
           label="Last Name"
         />
         {error.lastname && <p className="error-msg">{error.lastname}</p>}
+
         <InputField
           id="email"
           value={userInfo.email}
@@ -144,7 +157,12 @@ function SignupForm() {
           label="Email"
         />
         {error.email && <p className="error-msg">{error.email}</p>}
-        <Button type="submit" name="Sign Up" />
+
+        <Button
+          type="submit"
+          name={isLoading ? "Signing up..." : "Sign Up"}
+          disabled={isLoading}
+        />
       </form>
     </div>
   );

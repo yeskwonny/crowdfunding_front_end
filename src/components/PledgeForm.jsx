@@ -90,10 +90,13 @@ function PledgeForm({ id, pledgeData = {} }) {
         navigate(`/project/${pledge.project}`);
       }, 1500);
     } catch (error) {
+      const errorMsg = error.data.error;
+
       console.error(
         isEdit ? "Error updating the pledge:" : "Error creating the pledge:",
         error.message
       );
+      setResultMsg(errorMsg);
     }
   }
 

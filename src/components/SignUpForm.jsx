@@ -19,7 +19,7 @@ function SignupForm() {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({});
-  console.log(error);
+
 
   function handleChange(e) {
     const { id, value } = e.target;

@@ -88,7 +88,7 @@ function PledgeForm({ id, pledgeData = {} }) {
       }
       setTimeout(() => {
         navigate(`/project/${pledge.project}`);
-      }, 1500);
+      }, 1000);
     } catch (error) {
       const errorMsg = error.data.error;
 

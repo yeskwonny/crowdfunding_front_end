@@ -26,16 +26,15 @@ async function postSignUp(username, password, email, firstname, lastname) {
     if (!response.ok) {
       const contentType = response.headers.get("Content-Type");
       if (contentType && contentType.includes("application/json")) {
-        const errorData = await response.json(); // JSON 응답 처리
+        const errorData = await response.json(); 
         throw errorData;
       } else {
-        // HTML 또는 다른 형식의 응답 처리
         const errorText = await response.text();
         throw new Error(`Unexpected response: ${errorText}`);
       }
     }
 
-    return await response.json(); // 성공한 응답 반환
+    return await response.json(); 
   } catch (error) {
     console.error("Error in postSignUp:", error);
     throw error;

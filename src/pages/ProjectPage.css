@@ -63,6 +63,15 @@
   margin-top: 10px;
   font-weight: bold;
 }
+.end-message {
+  flex: 1;
+}
+.end-message span {
+  display: block;
+  text-align: center;
+  font-size: 12px;
+  color: var(--color-red);
+}
 
 .movie-container {
   display: grid;

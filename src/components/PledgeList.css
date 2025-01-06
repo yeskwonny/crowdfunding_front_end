@@ -10,10 +10,18 @@
   gap: 5px;
 }
 
-.pledge-name {
+.pledge-name,
+.pledge-amount,
+.pledge-comment {
   display: flex;
   align-items: center;
   gap: 5px;
+}
+
+.pledge-name span,
+.pledge-amount span,
+.pledge-comment span {
+  font-size: 11px;
 }
 
 .pledge-side-bar {

@@ -62,6 +62,14 @@ function ProjectPage() {
     return newFormat;
   }
 
+  // checking deadline is over or not
+  function checkingDeadline() {
+    const deadline = new Date(project.goal_deadline);
+    const now = new Date();
+    // return true or false
+    return now > deadline;
+  }
+
   // !todo:need loading status
 
   if (isLoading) {
@@ -141,7 +149,14 @@ function ProjectPage() {
               />
 
               <div className="button-container">
-                <Button onClick={handlePledgeClick} name="Make a Pledge" />
+                {checkingDeadline() ? (
+                  <div className="end-message">
+                    <span>The funding period has ended.</span>
+                    <span>Explore other exciting projects!</span>
+                  </div>
+                ) : (
+                  <Button onClick={handlePledgeClick} name="Make a Pledge" />
+                )}
               </div>
 
               {errorMsg && <p className="error-message">{errorMsg}</p>}

@@ -11,13 +11,22 @@ function PledgeList({ pledges }) {
     return <p style={{ textAlign: "center" }}>No pledges yet.</p>;
   }
   const allPledges = isShowAll ? pledges : pledges.slice(0, 5);
+  //change number format
+  function changeNumFormat(num) {
+    const newFormat = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return newFormat;
+  }
+  function changeNumFormat(num) {
+    const newFormat = num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return newFormat;
+  }
 
   function handleOnClick() {
     if (isShowAll) {
       window.scrollTo({
         top: 0,
         left: 0,
-        behavior: "smooth", // 부드럽게 스크롤 이동
+        behavior: "smooth",
       });
     }
     setIsShowAll(!isShowAll);
@@ -30,9 +39,9 @@ function PledgeList({ pledges }) {
           <div className="pledge-item">
             <div className="pledge-name">
               <PiHandHeartBold />
-              <span>Username: {pledgeData.supporter}</span>
+              <span>Supporter: {pledgeData.username}</span>
             </div>
-            <span>Amount: ${pledgeData.amount}</span>
+            <span>Amount: ${changeNumFormat(pledgeData.amount)}</span>
             <span>Comment: {pledgeData.comment}</span>
           </div>
         </div>

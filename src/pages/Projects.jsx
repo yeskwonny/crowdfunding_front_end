@@ -35,6 +35,7 @@ function Projects() {
           <ProjectCard key={key} projectData={projectData} baseURL="project" />
         ))
       ) : (
+        //!todo create a page
         <p>No result</p>
       )}
     </div>

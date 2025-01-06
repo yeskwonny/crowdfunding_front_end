@@ -20,6 +20,7 @@ function ProjectPage() {
 
   const [errorMsg, setErrorMsg] = useState("");
   const { project, isLoading, error } = useProject(id);
+  console.log(project);
 
   const isOwner = String(project.owner) === String(auth.user_id);
 
